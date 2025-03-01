@@ -1,0 +1,9 @@
+.next
+node_modules
+.dockerignore
+.env.example
+.gitignore
+.prettierrc
+docker-compose-local.yml
+Dockerfile
+README.md

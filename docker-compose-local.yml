@@ -1,0 +1,15 @@
+services:
+  next:
+    image: synerdo-ui
+    build: ./
+    container_name: synerdo-ui-c
+    ports:
+      - 0.0.0.0:3000:3000
+    networks:
+      - synerdo-network
+    env_file: ./.env
+    restart: always
+
+networks:
+  synerdo-network:
+    driver: bridge
