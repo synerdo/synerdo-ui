@@ -1,5 +1,6 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 
@@ -10,6 +11,23 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+      project: "./tsconfig.json",
+      ecmaVersion: 2020,
+      sourceType: "module",
+    },
+    overrides: [
+      {
+        files: ["eslint.config.mjs"],
+        parser: "espree",
+      },
+    ],
     extends: [
       // Next best practices
       "next",
@@ -26,23 +44,6 @@ const eslintConfig = [
       // Prettier support
       "prettier",
     ],
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-      project: "./tsconfig.json",
-      ecmaVersion: 2020,
-      sourceType: "module",
-    },
-    overrides: [
-      {
-        files: ["eslint.config.mjs"],
-        parser: "espree",
-      },
-    ],
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
     rules: {
       // General rules
       semi: ["error", "always"],
