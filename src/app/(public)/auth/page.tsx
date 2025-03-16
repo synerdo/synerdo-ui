@@ -1,24 +1,12 @@
-import { SxStyle } from "@/classes";
-import { Box } from "@mui/material";
+import { AuthContent } from "@/components/auth";
+import { SearchParams } from "@/types";
 
-export default function AuthPage() {
-  return (
-    <Box sx={sxStyle.container}>
-      <Box sx={sxStyle.content}></Box>
-    </Box>
-  );
+export default async function AuthPage({
+  searchParams,
+}: {
+  searchParams?: Promise<SearchParams>;
+}) {
+  const pageSearchParams = (await searchParams) || {};
+
+  return <AuthContent searchParams={pageSearchParams} />;
 }
-
-const sxStyle = SxStyle.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  content: {
-    maxWidth: "700px",
-    width: "100%",
-  },
-});

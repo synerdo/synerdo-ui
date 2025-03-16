@@ -24,7 +24,9 @@ export function Layout({ children }: LayoutProps) {
         <Grid size={6} sx={sxStyle.gridColumn}>
           <ThemeButton sx={sxStyle.themeButton} />
 
-          {children}
+          <Box sx={sxStyle.container}>
+            <Box sx={sxStyle.content}>{children}</Box>
+          </Box>
         </Grid>
       </Grid>
     </Box>
@@ -67,5 +69,16 @@ const sxStyle = SxStyle.create({
     position: "absolute",
     top: 0,
     right: 0,
+  },
+  container: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  content: {
+    maxWidth: "550px",
+    width: "100%",
   },
 });
