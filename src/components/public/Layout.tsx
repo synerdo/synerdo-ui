@@ -1,4 +1,5 @@
 import { Banner } from "../banners";
+import { ThemeButton } from "../buttons";
 import { Logo } from "../logos";
 import { SxStyle } from "@/classes";
 import { SX_STYLE } from "@/constants";
@@ -21,6 +22,8 @@ export function Layout({ children }: LayoutProps) {
         </Grid>
 
         <Grid size={6} sx={sxStyle.gridColumn}>
+          <ThemeButton sx={sxStyle.themeButton} />
+
           {children}
         </Grid>
       </Grid>
@@ -59,5 +62,10 @@ const sxStyle = SxStyle.create({
     transform: "translate(-50%, -50%)",
     width: "60%",
     height: "auto",
+  },
+  themeButton: {
+    position: "absolute",
+    top: 0,
+    right: 0,
   },
 });

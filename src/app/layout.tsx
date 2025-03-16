@@ -1,5 +1,6 @@
 import { SxStyle } from "@/classes";
 import { CacheProvider, ThemeProvider } from "@/components/providers";
+import { poppins, montserrat } from "@/constants";
 import { CssBaseline, Box } from "@mui/material";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { Metadata } from "next";
@@ -18,7 +19,12 @@ export default function RootLayout({
     <CacheProvider>
       <ThemeProvider>
         <CssBaseline />
-        <Box component="html" sx={sxStyle.html} suppressHydrationWarning>
+        <Box
+          component="html"
+          sx={sxStyle.html}
+          className={`${poppins.variable} ${montserrat.variable}`}
+          suppressHydrationWarning
+        >
           <Box component="body" sx={sxStyle.body}>
             <InitColorSchemeScript attribute="class" />
             {children}
