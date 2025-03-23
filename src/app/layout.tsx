@@ -1,7 +1,8 @@
-import { theme } from "@/constants";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
+import { SxStyle } from "@/classes";
+import { CacheProvider, ThemeProvider } from "@/components/providers";
+import { poppins, montserrat } from "@/constants";
+import { CssBaseline, Box } from "@mui/material";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,15 +16,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+    <CacheProvider>
+      <ThemeProvider>
+        <CssBaseline />
+        <Box
+          component="html"
+          sx={sxStyle.html}
+          className={`${poppins.variable} ${montserrat.variable}`}
+          suppressHydrationWarning
+        >
+          <Box component="body" sx={sxStyle.body}>
+            <InitColorSchemeScript attribute="class" />
             {children}
-          </ThemeProvider>
-        </AppRouterCacheProvider>
-      </body>
-    </html>
+          </Box>
+        </Box>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
+
+const sxStyle = SxStyle.create({
+  html: {
+    width: "100%",
+    height: "100%",
+  },
+  body: {
+    width: "100%",
+    height: "100%",
+    overflowX: "hidden",
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+  },
+});

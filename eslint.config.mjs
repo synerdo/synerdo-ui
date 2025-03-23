@@ -1,8 +1,7 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const compat = new FlatCompat({
   baseDirectory: dirname(fileURLToPath(import.meta.url)),
@@ -29,17 +28,21 @@ const eslintConfig = [
       },
     ],
     extends: [
+      // General best practices
+      "eslint:recommended",
+      "plugin:jsx-a11y/recommended",
+
+      // Typescript best practices
+      "plugin:@typescript-eslint/recommended",
+
+      // React best practices
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+
       // Next best practices
       "next",
       "next/typescript",
       "plugin:@next/next/recommended",
-
-      // General best practices
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "plugin:react-hooks/recommended",
-      "plugin:jsx-a11y/recommended",
 
       // Prettier support
       "prettier",
