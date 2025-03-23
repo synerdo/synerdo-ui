@@ -3,9 +3,17 @@ import { Grid2 as Grid, Grid2Props as GridProps } from "@mui/material";
 
 interface LayoutColumnProps extends GridProps {}
 
-export function LayoutColumn({ children, ...props }: LayoutColumnProps) {
+export function LayoutColumn({
+  children,
+  sx,
+  ...props
+}: LayoutColumnProps) {
   return (
-    <Grid {...props} size={6} sx={sxStyle.column}>
+    <Grid
+      {...props}
+      size={{ xs: 12, md: 6 }}
+      sx={{ ...sxStyle.column, ...sx }}
+    >
       {children}
     </Grid>
   );
@@ -14,8 +22,10 @@ export function LayoutColumn({ children, ...props }: LayoutColumnProps) {
 const sxStyle = SxStyle.create({
   column: {
     position: "relative",
-    height: "100%",
-    borderRadius: 3,
+    borderRadius: {
+      xs: 0,
+      md: 3,
+    },
     overflow: "hidden",
   },
 });

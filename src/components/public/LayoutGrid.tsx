@@ -13,7 +13,8 @@ export function LayoutGrid({ children, ...props }: LayoutGridProps) {
 
 const sxStyle = SxStyle.create({
   grid: {
-    height: "100%",
+    flex: 1,
+    position: "relative",
     padding: 3,
   },
 });

@@ -1,3 +1,4 @@
+import { SxStyle } from "@/classes";
 import { poppins, montserrat } from "@/constants";
 import { Box, BoxProps } from "@mui/material";
 
@@ -8,7 +9,7 @@ export function Html({ children, ...props }: HtmlProps) {
     <Box
       {...props}
       component="html"
-      sx={{ width: "100%", height: "100%" }}
+      sx={sxStyle.html}
       className={`${poppins.variable} ${montserrat.variable}`}
       suppressHydrationWarning
     >
@@ -16,3 +17,10 @@ export function Html({ children, ...props }: HtmlProps) {
     </Box>
   );
 }
+
+const sxStyle = SxStyle.create({
+  html: {
+    width: "100%",
+    height: "100%",
+  },
+});

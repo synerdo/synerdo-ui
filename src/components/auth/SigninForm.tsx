@@ -1,5 +1,6 @@
 "use client";
 
+import { SxStyle } from "@/classes";
 import { InputField } from "@/components/inputs";
 import { ISigninFields, signinSchema } from "@/schemas";
 import { Link as MuiLink, Typography } from "@mui/material";
@@ -32,19 +33,24 @@ export function SigninForm() {
           type="text"
           name="email"
           label="Email"
-          sx={{ mb: 2 }}
+          sx={sxStyle.itemSpacing}
         />
 
         <InputField<ISigninFields>
           type="password"
           name="password"
           label="Password"
-          sx={{ mb: 2 }}
+          sx={sxStyle.itemSpacing}
         />
 
-        <InputField disabled type="button" name="Sign in" sx={{ mb: 2 }} />
+        <InputField
+          disabled
+          type="button"
+          name="Sign in"
+          sx={sxStyle.itemSpacing}
+        />
 
-        <Typography sx={{ textAlign: "center" }}>
+        <Typography sx={sxStyle.textCenter}>
           Don&apos;t have an account?{" "}
           <MuiLink component={Link} href="/auth?signup">
             Sign up
@@ -54,3 +60,12 @@ export function SigninForm() {
     </Formik>
   );
 }
+
+const sxStyle = SxStyle.create({
+  itemSpacing: {
+    mb: 2,
+  },
+  textCenter: {
+    textAlign: "center",
+  },
+});

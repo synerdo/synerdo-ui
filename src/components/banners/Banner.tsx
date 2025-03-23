@@ -1,4 +1,4 @@
-import { SX_STYLE } from "@/constants";
+import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 import Image from "next/image";
 
@@ -6,7 +6,7 @@ interface BannerProps extends BoxProps {}
 
 export function Banner({ sx, ...props }: BannerProps) {
   return (
-    <Box sx={{ ...SX_STYLE.relative, ...sx }} {...props}>
+    <Box sx={{ ...sxStyle.banner, ...sx }} {...props}>
       <Image
         src="/public/banner.webp"
         alt="Synerdo banner"
@@ -24,3 +24,9 @@ export function Banner({ sx, ...props }: BannerProps) {
     </Box>
   );
 }
+
+const sxStyle = SxStyle.create({
+  banner: {
+    position: "relative",
+  },
+});

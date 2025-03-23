@@ -2,13 +2,32 @@
 
 import { createTheme, responsiveFontSizes } from "@mui/material";
 
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    transparent?: Record<string, PaletteOptions["primary"]>;
+  }
+}
+
 export const THEME = responsiveFontSizes(
   createTheme({
     cssVariables: {
       colorSchemeSelector: "class",
     },
     colorSchemes: {
-      light: {},
+      light: {
+        palette: {
+          transparent: {
+            white: {
+              300: "rgba(255, 255, 255, 0.3)",
+              800: "rgba(255, 255, 255, 0.8)",
+            },
+            black: {
+              300: "rgba(0, 0, 0, 0.3)",
+              800: "rgba(0, 0, 0, 0.8)",
+            },
+          },
+        },
+      },
       dark: {},
     },
     typography: {

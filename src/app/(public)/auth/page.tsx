@@ -1,3 +1,4 @@
+import { SxStyle } from "@/classes";
 import { AuthContainer, SigninForm, SignupForm } from "@/components/auth";
 import { SearchParams } from "@/types";
 import { Typography } from "@mui/material";
@@ -13,7 +14,7 @@ export default async function AuthPage({
 
   return (
     <AuthContainer>
-      <Typography variant="h1" sx={{ mb: 4 }}>
+      <Typography variant="h1" sx={sxStyle.itemSpacing}>
         {isSignupForm ? "Sign up" : "Sign in"}
       </Typography>
 
@@ -21,3 +22,9 @@ export default async function AuthPage({
     </AuthContainer>
   );
 }
+
+const sxStyle = SxStyle.create({
+  itemSpacing: {
+    mb: 4,
+  },
+});

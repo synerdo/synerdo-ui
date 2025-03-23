@@ -1,3 +1,4 @@
+import { SxStyle } from "@/classes";
 import { HomeContainer } from "@/components/home";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";
@@ -5,10 +6,10 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <HomeContainer>
-      <Typography variant="h1" sx={{ mb: 4 }}>
+      <Typography variant="h1" sx={sxStyle.itemSpacing}>
         Synergy does
       </Typography>
-      <Typography sx={{ mb: 4 }}>
+      <Typography sx={sxStyle.itemSpacing}>
         Welcome to <strong>Synerdo</strong> — your all-in-one task
         management solution designed to keep you organized, efficient, and
         in perfect sync with your goals.
@@ -19,3 +20,9 @@ export default function HomePage() {
     </HomeContainer>
   );
 }
+
+const sxStyle = SxStyle.create({
+  itemSpacing: {
+    mb: 4,
+  },
+});

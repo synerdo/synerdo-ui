@@ -1,12 +1,12 @@
 import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 
-interface ContentContainerProps extends BoxProps {}
+interface PageContainerProps extends BoxProps {}
 
-export function ContentContainer({
+export function PageContainer({
   children,
   ...props
-}: ContentContainerProps) {
+}: PageContainerProps) {
   return (
     <Box {...props} sx={sxStyle.container}>
       {children}
