@@ -1,1 +1,1 @@
-export * from "./HomeContent";
+export * from "./HomeContainer";

@@ -53,7 +53,7 @@ export function SignupForm() {
         <InputField disabled type="button" name="Sign up" sx={{ mb: 2 }} />
 
         <Typography sx={{ textAlign: "center" }}>
-          Don&apos;t have an account?{" "}
+          Already have an account?{" "}
           <MuiLink component={Link} href="/auth?signin">
             Sign in
           </MuiLink>

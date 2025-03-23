@@ -1,10 +1,7 @@
 import { Button, ButtonProps } from "@mui/material";
 import { FormikValues, useFormikContext } from "formik";
 
-export type TButtonFieldPropsOmit = "fullWidth";
-
-export interface ButtonFieldProps
-  extends Omit<ButtonProps, TButtonFieldPropsOmit> {
+export interface ButtonFieldProps extends ButtonProps {
   name: string;
 }
 

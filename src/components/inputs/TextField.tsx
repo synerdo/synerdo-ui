@@ -4,17 +4,7 @@ import {
 } from "@mui/material";
 import { FormikValues, useFormikContext } from "formik";
 
-export type TTextFieldPropsOmit =
-  | "value"
-  | "onChange"
-  | "onBlur"
-  | "error"
-  | "helperText";
-
-export type TextFieldProps = Omit<
-  MuiTextFieldProps,
-  TTextFieldPropsOmit
-> & {
+export type TextFieldProps = MuiTextFieldProps & {
   name: string;
 };
 
