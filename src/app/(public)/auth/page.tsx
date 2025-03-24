@@ -1,24 +1,30 @@
 import { SxStyle } from "@/classes";
-import { Box } from "@mui/material";
+import { AuthContainer, SigninForm, SignupForm } from "@/components/auth";
+import { SearchParams } from "@/types";
+import { Typography } from "@mui/material";
 
-export default function AuthPage() {
+export default async function AuthPage({
+  searchParams,
+}: {
+  searchParams?: Promise<SearchParams>;
+}) {
+  const sp = (await searchParams) || {};
+
+  const isSignupForm = sp["signup"] !== undefined;
+
   return (
-    <Box sx={sxStyle.container}>
-      <Box sx={sxStyle.content}></Box>
-    </Box>
+    <AuthContainer>
+      <Typography variant="h1" sx={sxStyle.itemSpacing}>
+        {isSignupForm ? "Sign up" : "Sign in"}
+      </Typography>
+
+      {isSignupForm ? <SignupForm /> : <SigninForm />}
+    </AuthContainer>
   );
 }
 
 const sxStyle = SxStyle.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  content: {
-    maxWidth: "700px",
-    width: "100%",
+  itemSpacing: {
+    mb: 4,
   },
 });

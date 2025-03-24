@@ -1,19 +1,16 @@
 import { THEME } from "@/constants";
-import { ThemeProvider as MaterialThemeProvider } from "@mui/material";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material";
 
-type MaterialThemeProviderProps = React.ComponentProps<
-  typeof MaterialThemeProvider
->;
+type MuiThemeProviderProps = React.ComponentProps<typeof MuiThemeProvider>;
 
-interface ThemeProviderProps
-  extends Omit<MaterialThemeProviderProps, "theme"> {
+interface ThemeProviderProps extends MuiThemeProviderProps {
   children: React.ReactNode;
 }
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
-    <MaterialThemeProvider theme={THEME} {...props}>
+    <MuiThemeProvider {...props} theme={THEME}>
       {children}
-    </MaterialThemeProvider>
+    </MuiThemeProvider>
   );
 }

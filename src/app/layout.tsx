@@ -1,7 +1,6 @@
-import { SxStyle } from "@/classes";
+import { Html, Body } from "@/components/app";
 import { CacheProvider, ThemeProvider } from "@/components/providers";
-import { poppins, montserrat } from "@/constants";
-import { CssBaseline, Box } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { Metadata } from "next";
 
@@ -18,34 +17,14 @@ export default function RootLayout({
   return (
     <CacheProvider>
       <ThemeProvider>
-        <CssBaseline />
-        <Box
-          component="html"
-          sx={sxStyle.html}
-          className={`${poppins.variable} ${montserrat.variable}`}
-          suppressHydrationWarning
-        >
-          <Box component="body" sx={sxStyle.body}>
+        <Html>
+          <Body>
+            <CssBaseline />
             <InitColorSchemeScript attribute="class" />
             {children}
-          </Box>
-        </Box>
+          </Body>
+        </Html>
       </ThemeProvider>
     </CacheProvider>
   );
 }
-
-const sxStyle = SxStyle.create({
-  html: {
-    width: "100%",
-    height: "100%",
-  },
-  body: {
-    width: "100%",
-    height: "100%",
-    overflowX: "hidden",
-    overflowY: "auto",
-    display: "flex",
-    flexDirection: "column",
-  },
-});
