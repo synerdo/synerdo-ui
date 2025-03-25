@@ -4,7 +4,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { IconButton, InputAdornment } from "@mui/material";
 import { useState } from "react";
 
-export interface PasswordFieldProps extends TextFieldProps {}
+export type PasswordFieldProps = TextFieldProps;
 
 export function PasswordField({ ...props }: PasswordFieldProps) {
   const [isShownPassword, setIsShownPassword] = useState(false);

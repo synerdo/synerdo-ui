@@ -3,7 +3,7 @@ import { ThemeProvider as MuiThemeProvider } from "@mui/material";
 
 type MuiThemeProviderProps = React.ComponentProps<typeof MuiThemeProvider>;
 
-interface ThemeProviderProps extends MuiThemeProviderProps {
+interface ThemeProviderProps extends Omit<MuiThemeProviderProps, "theme"> {
   children: React.ReactNode;
 }
 
