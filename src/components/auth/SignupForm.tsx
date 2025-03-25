@@ -15,10 +15,10 @@ export function SignupForm() {
   };
 
   const handleSubmit = (
-    values: ISignupFields,
+    _values: ISignupFields,
     formikHelpers: FormikHelpers<ISignupFields>
   ) => {
-    console.log(values);
+    // console.log(values);
 
     formikHelpers.resetForm();
   };
