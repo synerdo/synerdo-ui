@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export function SigninForm() {
   const initialValues = {
-    email: "",
+    username: "",
     password: "",
   };
 
@@ -31,8 +31,8 @@ export function SigninForm() {
       <Form>
         <InputField<ISigninFields>
           type="text"
-          name="email"
-          label="Email"
+          name="username"
+          label="Username"
           sx={sxStyle.itemSpacing}
         />
 
