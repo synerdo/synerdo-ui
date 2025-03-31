@@ -13,6 +13,7 @@ export function Banner({ sx, ...props }: BannerProps) {
         width={800}
         height={800}
         quality={100}
+        priority={true}
         style={{
           position: "absolute",
           inset: 0,

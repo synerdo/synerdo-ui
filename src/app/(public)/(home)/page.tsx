@@ -1,3 +1,5 @@
+"use client";
+
 import { SxStyle } from "@/classes";
 import { HomeContainer } from "@/components/home";
 import { Button, Typography } from "@mui/material";

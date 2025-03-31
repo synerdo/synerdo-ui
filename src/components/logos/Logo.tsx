@@ -1,3 +1,4 @@
+import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 import Image from "next/image";
 
@@ -13,13 +14,17 @@ export function Logo({ color = "light", ...props }: BannerProps) {
         alt="Synerdo banner"
         width={585}
         height={81}
-        style={{
-          display: "block",
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-        }}
+        style={sxStyle.image}
       />
     </Box>
   );
 }
+
+const sxStyle = SxStyle.create({
+  image: {
+    display: "block",
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",
+  },
+});
