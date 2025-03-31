@@ -1,25 +1,11 @@
 "use client";
 
-import { Api } from "@/api";
 import { SxStyle } from "@/classes";
 import { HomeContainer } from "@/components/home";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";
-import { useEffect } from "react";
 
 export default function HomePage() {
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await Api.get("/accesstest");
-
-        console.log(response);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
-
   return (
     <HomeContainer>
       <Typography variant="h1" sx={sxStyle.itemSpacing}>

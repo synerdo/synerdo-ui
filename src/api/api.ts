@@ -5,7 +5,7 @@ const baseURL = `${process.env.NEXT_PUBLIC_API_HOST || ""}/api`;
 
 export const Api = axios.create({
   headers: {
-    ContentType: "application/json",
+    "Content-Type": "application/json",
   },
   baseURL,
 });
@@ -14,7 +14,9 @@ Api.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem("accessToken") || "";
 
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
 
     return config;
   },
@@ -38,7 +40,7 @@ Api.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem("refreshToken") || "";
-        const response = await Api.post("/auth/token/refresh", {
+        const response = await Api.post("/auth/token/refresh/", {
           refresh: refreshToken,
         });
 
