@@ -2,9 +2,7 @@ import { SxStyle } from "@/classes";
 import { poppins, montserrat } from "@/constants";
 import { Box, BoxProps } from "@mui/material";
 
-interface HtmlProps extends BoxProps<"html"> {}
-
-export function Html({ children, ...props }: HtmlProps) {
+export function Html({ children, ...props }: BoxProps<"html">) {
   return (
     <Box
       {...props}

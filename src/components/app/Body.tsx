@@ -1,9 +1,7 @@
 import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 
-interface BodyProps extends BoxProps<"body"> {}
-
-export function Body({ children, ...props }: BodyProps) {
+export function Body({ children, ...props }: BoxProps<"body">) {
   return (
     <Box {...props} component="body" sx={sxStyle.body}>
       {children}
