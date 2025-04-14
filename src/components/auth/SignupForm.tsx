@@ -1,26 +1,52 @@
 "use client";
 
+import { Api } from "@/api";
 import { SxStyle } from "@/classes";
 import { InputField } from "@/components/inputs";
 import { ISignupFields, signupSchema } from "@/schemas";
 import { Link as MuiLink, Typography } from "@mui/material";
+import axios from "axios";
 import { Form, Formik, FormikHelpers } from "formik";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function SignupForm() {
+  const router = useRouter();
+
   const initialValues = {
     email: "",
     username: "",
     password: "",
   };
 
-  const handleSubmit = (
-    _values: ISignupFields,
+  const handleSubmit = async (
+    values: ISignupFields,
     formikHelpers: FormikHelpers<ISignupFields>
   ) => {
-    // console.log(values);
+    const { resetForm } = formikHelpers;
 
-    formikHelpers.resetForm();
+    try {
+      await Api.post("/auth/register/", values);
+
+      router.push("/auth?signin");
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        const fields = err.response.data;
+        const errors: Record<string, string> = {};
+        const touched: Record<string, boolean> = {};
+
+        for (const field in fields) {
+          errors[field] = fields[field][0];
+          touched[field] = true;
+        }
+
+        resetForm({ errors, touched });
+      } else {
+        console.error(err);
+
+        resetForm();
+      }
+    }
   };
 
   return (
