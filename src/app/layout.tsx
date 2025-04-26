@@ -1,5 +1,5 @@
 import { Html, Body } from "@/components/app";
-import { CacheProvider, ThemeProvider } from "@/components/providers";
+import { CacheProvider, ThemeProvider } from "@/providers";
 import { CssBaseline } from "@mui/material";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { Metadata } from "next";
@@ -21,6 +21,7 @@ export default function RootLayout({
           <Body>
             <CssBaseline />
             <InitColorSchemeScript attribute="class" />
+
             {children}
           </Body>
         </Html>

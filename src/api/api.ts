@@ -1,7 +1,8 @@
 import { HttpStatusCode } from "./httpStatusCode";
+import { ENV } from "@/constants";
 import axios from "axios";
 
-const baseURL = `${process.env.NEXT_PUBLIC_API_HOST || ""}/api`;
+const baseURL = `http://${ENV.apiHost}:${ENV.apiPort}/api`;
 
 export const Api = axios.create({
   headers: {
@@ -12,7 +13,7 @@ export const Api = axios.create({
 
 Api.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem("accessToken") || "";
+    const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -31,15 +32,16 @@ Api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
+    const refreshToken = localStorage.getItem("refreshToken");
 
     if (
+      refreshToken &&
       error.response.status === HttpStatusCode.UNAUTHORIZED &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem("refreshToken") || "";
         const response = await Api.post("/auth/token/refresh/", {
           refresh: refreshToken,
         });

@@ -1,22 +1,15 @@
 "use client";
 
-import { Api } from "@/api";
-import { useEffect, useState } from "react";
+import { useUserStore } from "@/stores";
 
 export default function RoomsPage() {
-  const [isAllowed, setIsAllowed] = useState(false);
+  const user = useUserStore((state) => state.user);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        await Api.get("/accesstest/");
+  return (
+    <div>
+      <h1>Rooms</h1>
 
-        setIsAllowed(true);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
-
-  return <h1>{isAllowed ? "Allowed" : "Not Allowed"}</h1>;
+      {user?.username}
+    </div>
+  );
 }
