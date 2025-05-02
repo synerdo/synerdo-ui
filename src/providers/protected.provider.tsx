@@ -1,6 +1,7 @@
 "use client";
 
-import { Api, IUsersMe } from "@/api";
+import { Api } from "@/api";
+import { IUser } from "@/interfaces";
 import { useUserStore } from "@/stores";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -16,7 +17,7 @@ export function ProtectedProvider({ children }: ProtectedProviderProps) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await Api.get<IUsersMe>("/users/me");
+        const response = await Api.get<IUser>("/users/me");
 
         const user = response.data;
 

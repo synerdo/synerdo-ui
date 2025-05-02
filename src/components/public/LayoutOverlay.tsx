@@ -21,13 +21,13 @@ const sxStyle = SxStyle.create({
     width: "100%",
     height: "100%",
     bgcolor: {
-      xs: "transparent.white.800",
-      md: "transparent.black.300",
+      xs: "white.80",
+      md: "black.30",
     },
     ...theme.applyStyles("dark", {
       bgcolor: {
-        xs: "transparent.black.800",
-        md: "transparent.black.300",
+        xs: "black.80",
+        md: "black.30",
       },
     }),
   }),

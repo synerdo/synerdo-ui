@@ -49,16 +49,16 @@ const eslintConfig = [
     ],
     rules: {
       // General rules
-      semi: ["error", "always"],
-      quotes: ["error", "double"],
-      "no-console": ["warn", { allow: ["warn", "error"] }],
+      semi: ["warn", "always"],
+      quotes: ["warn", "double"],
+      "no-console": ["warn", { allow: ["info", "warn", "error"] }],
       "no-unused-vars": "off",
 
       // Typescript rules
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-unused-vars": [
-        "error",
+        "warn",
         { argsIgnorePattern: "^_" },
       ],
 

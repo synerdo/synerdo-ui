@@ -1,15 +1,52 @@
-"use client";
-
-import { useUserStore } from "@/stores";
+import { ThemeButton } from "@/components/buttons";
+import {
+  Container,
+  Header,
+  HeaderLogo,
+  RowBox,
+} from "@/components/protected";
+import {
+  Layout,
+  RoomsList,
+  RoomActions,
+  CreateModal,
+  EditModal,
+  DeleteModal,
+  JoinModal,
+  LeaveModal,
+} from "@/components/rooms";
+import { Typography } from "@mui/material";
 
 export default function RoomsPage() {
-  const user = useUserStore((state) => state.user);
-
   return (
-    <div>
-      <h1>Rooms</h1>
+    <Layout>
+      <Header>
+        <HeaderLogo href="/rooms" mr="auto" />
 
-      {user?.username}
-    </div>
+        <ThemeButton />
+      </Header>
+
+      <Container>
+        <RowBox mb={4}>
+          <Typography variant="h4" mr={"auto"} mb={{ xs: 2, sm: 0 }}>
+            Rooms
+          </Typography>
+
+          <RoomActions />
+        </RowBox>
+
+        <RoomsList />
+      </Container>
+
+      <JoinModal />
+
+      <CreateModal />
+
+      <EditModal />
+
+      <DeleteModal />
+
+      <LeaveModal />
+    </Layout>
   );
 }

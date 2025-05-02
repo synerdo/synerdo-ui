@@ -13,7 +13,7 @@ export const Api = axios.create({
 
 Api.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken") || "";
 
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
@@ -32,16 +32,17 @@ Api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    const refreshToken = localStorage.getItem("refreshToken");
 
     if (
-      refreshToken &&
-      error.response.status === HttpStatusCode.UNAUTHORIZED &&
-      !originalRequest._retry
+      error?.response?.status === HttpStatusCode.UNAUTHORIZED &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/auth/token/refresh/")
     ) {
       originalRequest._retry = true;
 
       try {
+        const refreshToken = localStorage.getItem("refreshToken") || "";
+
         const response = await Api.post("/auth/token/refresh/", {
           refresh: refreshToken,
         });
