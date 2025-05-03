@@ -17,5 +17,6 @@ const sxStyle = SxStyle.create({
     overflowY: "auto",
     display: "flex",
     flexDirection: "column",
+    pt: "80px",
   },
 });

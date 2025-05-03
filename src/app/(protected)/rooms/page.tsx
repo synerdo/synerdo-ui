@@ -8,7 +8,7 @@ import {
 import {
   Layout,
   RoomsList,
-  RoomActions,
+  RoomsActions,
   CreateModal,
   EditModal,
   DeleteModal,
@@ -32,7 +32,7 @@ export default function RoomsPage() {
             Rooms
           </Typography>
 
-          <RoomActions />
+          <RoomsActions />
         </RowBox>
 
         <RoomsList />

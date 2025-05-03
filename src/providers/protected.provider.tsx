@@ -4,7 +4,7 @@ import { Api } from "@/api";
 import { IUser } from "@/interfaces";
 import { useUserStore } from "@/stores";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface ProtectedProviderProps {
   children: React.ReactNode;
@@ -13,6 +13,8 @@ interface ProtectedProviderProps {
 export function ProtectedProvider({ children }: ProtectedProviderProps) {
   const router = useRouter();
   const setUser = useUserStore((state) => state.setUser);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -27,10 +29,12 @@ export function ProtectedProvider({ children }: ProtectedProviderProps) {
 
         router.replace("/auth");
       }
+
+      setIsLoading(false);
     };
 
     checkAuth();
   }, [setUser, router]);
 
-  return children;
+  return isLoading ? null : children;
 }

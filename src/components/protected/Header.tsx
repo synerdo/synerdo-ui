@@ -6,31 +6,33 @@ import { Box, BoxProps } from "@mui/material";
 export function Header({ children, ...props }: BoxProps) {
   return (
     <Box {...props} sx={sxStyle.header}>
-      <Box sx={sxStyle.container}>{children}</Box>
+      {children}
     </Box>
   );
 }
 
 const sxStyle = SxStyle.create({
   header: (theme) => ({
-    width: "100%",
-    borderBottom: "1px solid",
-    borderColor: "grey.300",
-    ...theme.applyStyles("dark", {
-      borderColor: "grey.800",
-    }),
-  }),
-  container: (theme) => ({
-    maxWidth: `${+theme.general.containerWidth + 2 * 32}px`,
-    width: "100%",
-    minHeight: "80px",
-    mx: "auto",
+    position: "fixed",
+    zIndex: 10,
+    top: 0,
+    right: 0,
+    left: 0,
     px: {
       xs: `${20}px`,
       md: `${32}px`,
     },
+    minHeight: "80px",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    gap: 2,
+    borderBottom: "1px solid",
+    backgroundColor: "white.100",
+    borderColor: "grey.300",
+    ...theme.applyStyles("dark", {
+      backgroundColor: "background.default",
+      borderColor: "grey.800",
+    }),
   }),
 });

@@ -2,7 +2,7 @@ import { CreateButton, JoinButton } from "./buttons";
 import { SxStyle } from "@/classes";
 import { Box } from "@mui/material";
 
-export function RoomActions() {
+export function RoomsActions() {
   return (
     <Box sx={sxStyle.actions}>
       <JoinButton sx={sxStyle.button} />

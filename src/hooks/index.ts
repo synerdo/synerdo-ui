@@ -1,1 +1,1 @@
-export * from "./rooms.hooks";
+export * from "./rooms.hook";

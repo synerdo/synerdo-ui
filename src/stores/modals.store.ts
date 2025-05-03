@@ -26,10 +26,13 @@ export const useModalsStore = create<ModalsState>((set, get) => ({
 
   closeModal: (modalId: string) =>
     set((state) => {
-      const newOpenModals = { ...state.openModals };
-      delete newOpenModals[modalId];
+      state.openModals[modalId].isOpen = false;
 
-      return { openModals: newOpenModals };
+      setTimeout(() => {
+        state.openModals[modalId].data = null;
+      }, 300);
+
+      return { openModals: state.openModals };
     }),
 
   getModalData: <T>(modalId: string): T | undefined => {

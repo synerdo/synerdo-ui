@@ -3,4 +3,4 @@ export * from "./modals";
 export * from "./RoomsItem";
 export * from "./RoomsList";
 export * from "./Layout";
-export * from "./RoomActions";
+export * from "./RoomsActions";
