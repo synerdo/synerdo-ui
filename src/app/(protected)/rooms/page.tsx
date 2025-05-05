@@ -4,9 +4,9 @@ import {
   Header,
   HeaderLogo,
   RowBox,
+  Layout,
 } from "@/components/protected";
 import {
-  Layout,
   RoomsList,
   RoomsActions,
   CreateModal,
@@ -20,11 +20,7 @@ import { Typography } from "@mui/material";
 export default function RoomsPage() {
   return (
     <Layout>
-      <Header>
-        <HeaderLogo href="/rooms" mr="auto" />
-
-        <ThemeButton />
-      </Header>
+      <Header />
 
       <Container>
         <RowBox mb={4}>

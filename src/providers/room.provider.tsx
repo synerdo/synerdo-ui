@@ -14,7 +14,7 @@ interface RoomProviderProps {
 export function RoomProvider({ children }: RoomProviderProps) {
   const p = useParams();
 
-  const setRoom = useRoomsStore((state) => state.setRoom);
+  const setRoom = useRoomsStore((s) => s.setRoom);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);

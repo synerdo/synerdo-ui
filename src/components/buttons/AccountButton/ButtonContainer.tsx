@@ -1,5 +1,7 @@
+"use client";
+
 import { Box, BoxProps } from "@mui/material";
 
-export function Layout({ children, ...props }: BoxProps) {
+export function ButtonContainer({ children, ...props }: BoxProps) {
   return <Box {...props}>{children}</Box>;
 }

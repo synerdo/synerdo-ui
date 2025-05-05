@@ -1,3 +1,5 @@
+"use client";
+
 import { useDrawersStore } from "@/stores";
 import { Box, BoxProps, useTheme } from "@mui/material";
 
@@ -8,7 +10,7 @@ interface DrawerSlideProps extends BoxProps {
 export function DrawerSlide({ children, id, ...props }: DrawerSlideProps) {
   const theme = useTheme();
 
-  const isOpen = useDrawersStore((state) => state.getIsDrawerOpen(id));
+  const isOpen = useDrawersStore((s) => s.getIsDrawerOpen(id));
 
   const slidePaddingLeft = isOpen ? "300px" : "0";
 

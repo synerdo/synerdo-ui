@@ -14,11 +14,13 @@ declare module "@mui/material/styles" {
   interface Palette {
     white: Record<string, string>;
     black: Record<string, string>;
+    gray: Record<string, string>;
   }
 
   interface PaletteOptions {
     white: Record<string, string>;
     black: Record<string, string>;
+    gray: Record<string, string>;
   }
 }
 
@@ -31,6 +33,7 @@ export const THEME = responsiveFontSizes(
       light: {
         palette: {
           white: {
+            5: "rgba(255, 255, 255, 0.05)",
             20: "rgba(255, 255, 255, 0.2)",
             30: "rgba(255, 255, 255, 0.3)",
             40: "rgba(255, 255, 255, 0.4)",
@@ -43,6 +46,9 @@ export const THEME = responsiveFontSizes(
             40: "rgba(0, 0, 0, 0.4)",
             80: "rgba(0, 0, 0, 0.8)",
             100: "#000",
+          },
+          gray: {
+            800: "#343434",
           },
         },
       },

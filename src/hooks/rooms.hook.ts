@@ -4,7 +4,7 @@ import { useRoomsStore } from "@/stores";
 import { useEffect } from "react";
 
 export const useFetchRooms = () => {
-  const setRooms = useRoomsStore((state) => state.setRooms);
+  const setRooms = useRoomsStore((s) => s.setRooms);
 
   useEffect(() => {
     const fetchRooms = async () => {

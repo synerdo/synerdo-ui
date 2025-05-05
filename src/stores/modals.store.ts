@@ -29,7 +29,7 @@ export const useModalsStore = create<ModalsState>((set, get) => ({
       state.openModals[modalId].isOpen = false;
 
       setTimeout(() => {
-        state.openModals[modalId].data = null;
+        delete state.openModals[modalId];
       }, 300);
 
       return { openModals: state.openModals };

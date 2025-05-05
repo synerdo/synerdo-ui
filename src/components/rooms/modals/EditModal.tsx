@@ -20,9 +20,9 @@ export function EditModal() {
   const modalData = useModalsStore((state) =>
     state.getModalData<IEditModalData>(editModalId)
   );
-  const closeModal = useModalsStore((state) => state.closeModal);
+  const closeModal = useModalsStore((s) => s.closeModal);
 
-  const updateRoom = useRoomsStore((state) => state.updateRoom);
+  const updateRoom = useRoomsStore((s) => s.updateRoom);
 
   const initialValues = {
     name: modalData?.roomName || "",

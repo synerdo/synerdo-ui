@@ -14,17 +14,22 @@ import { ItemLink } from "./ItemLink";
 import { RoomsItemContainer } from "./RoomsItemContainer";
 import { IRoom } from "@/interfaces";
 import { useModalsStore, useUserStore } from "@/stores";
-import { getHexColors } from "@/utils";
+import { getColorsFromStr } from "@/utils";
 import { Box, MenuItemProps } from "@mui/material";
+import { useMemo } from "react";
 
 interface RoomsItemProps {
   room: IRoom;
 }
 
 export function RoomsItem({ room }: RoomsItemProps) {
-  const user = useUserStore((state) => state.user);
-  const openModal = useModalsStore((state) => state.openModal);
-  const hexColors = getHexColors(String(room.access_code));
+  const user = useUserStore((s) => s.user);
+  const openModal = useModalsStore((s) => s.openModal);
+
+  const hexColors = useMemo(
+    () => getColorsFromStr(String(room.access_code)),
+    [room.access_code]
+  );
 
   const isUserRoom = user?.id == room.owner;
 

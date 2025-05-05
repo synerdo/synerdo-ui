@@ -1,3 +1,5 @@
+"use client";
+
 import { useDrawersStore } from "@/stores";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
@@ -8,9 +10,9 @@ interface DrawerButtonProps extends IconButtonProps {
 }
 
 export function DrawerButton({ id, ...props }: DrawerButtonProps) {
-  const isOpen = useDrawersStore((state) => state.getIsDrawerOpen(id));
-  const openDrawer = useDrawersStore((state) => state.openDrawer);
-  const closeDrawer = useDrawersStore((state) => state.closeDrawer);
+  const isOpen = useDrawersStore((s) => s.getIsDrawerOpen(id));
+  const openDrawer = useDrawersStore((s) => s.openDrawer);
+  const closeDrawer = useDrawersStore((s) => s.closeDrawer);
 
   const handleClick = () => {
     if (isOpen) {

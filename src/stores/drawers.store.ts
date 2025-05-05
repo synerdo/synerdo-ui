@@ -1,11 +1,12 @@
+import { getStorageOpenDrawers } from "@/utils";
 import { create } from "zustand";
 
-interface DrawerState<T = unknown> {
+export interface DrawerState<T = unknown> {
   isOpen: boolean;
   data?: T;
 }
 
-interface DrawersState {
+export interface DrawersState {
   openDrawers: Record<string, DrawerState>;
   openDrawer: <T>(drawerId: string, drawerData?: T) => void;
   closeDrawer: (drawerId: string) => void;
@@ -14,22 +15,37 @@ interface DrawersState {
 }
 
 export const useDrawersStore = create<DrawersState>((set, get) => ({
-  openDrawers: {},
+  openDrawers: getStorageOpenDrawers(),
 
   openDrawer: <T>(drawerId: string, drawerData?: T) =>
-    set((state) => ({
-      openDrawers: {
+    set((state) => {
+      const newDrawers = {
         ...state.openDrawers,
         [drawerId]: { isOpen: true, data: drawerData },
-      },
-    })),
+      };
+
+      localStorage.setItem("openDrawers", JSON.stringify(newDrawers));
+
+      return {
+        openDrawers: newDrawers,
+      };
+    }),
 
   closeDrawer: (drawerId: string) =>
     set((state) => {
+      if (!state.openDrawers[drawerId]) {
+        return { openDrawers: state.openDrawers };
+      }
+
       state.openDrawers[drawerId].isOpen = false;
 
       setTimeout(() => {
-        state.openDrawers[drawerId].data = null;
+        delete state.openDrawers[drawerId];
+
+        localStorage.setItem(
+          "openDrawers",
+          JSON.stringify(state.openDrawers)
+        );
       }, 300);
 
       return { openDrawers: state.openDrawers };

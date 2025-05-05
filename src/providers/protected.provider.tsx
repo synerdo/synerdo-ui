@@ -12,7 +12,7 @@ interface ProtectedProviderProps {
 
 export function ProtectedProvider({ children }: ProtectedProviderProps) {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setUser = useUserStore((s) => s.setUser);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

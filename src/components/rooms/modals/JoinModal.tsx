@@ -12,9 +12,9 @@ import { Form, Formik, FormikHelpers } from "formik";
 export const joinModalId = "join-room";
 
 export function JoinModal() {
-  const closeModal = useModalsStore((state) => state.closeModal);
+  const closeModal = useModalsStore((s) => s.closeModal);
 
-  const addRoom = useRoomsStore((state) => state.addRoom);
+  const addRoom = useRoomsStore((s) => s.addRoom);
 
   const initialValues = {
     access_code: "",

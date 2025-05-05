@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { useMemo } from "react";
 
 interface DrawerProps extends Omit<MuiDrawerProps, "open"> {
   id: string;
@@ -18,10 +19,13 @@ export function Drawer({ id, children, ...props }: DrawerProps) {
 
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
-  const isOpen = useDrawersStore((state) => state.getIsDrawerOpen(id));
-  const closeDrawer = useDrawersStore((state) => state.closeDrawer);
+  const isOpen = useDrawersStore((s) => s.getIsDrawerOpen(id));
+  const closeDrawer = useDrawersStore((s) => s.closeDrawer);
 
-  const drawerVariant = isDesktop ? "persistent" : "temporary";
+  const drawerVariant = useMemo(
+    () => (isDesktop ? "persistent" : "temporary"),
+    [isDesktop]
+  );
 
   const handleClose = () => {
     closeDrawer(id);
@@ -48,10 +52,11 @@ const sxStyle = SxStyle.create({
       zIndex: 5,
       maxWidth: "300px",
       width: "100%",
-      paddingTop: {
-        xs: "20px",
-        md: "100px",
+      pt: {
+        md: "80px",
       },
+      display: "flex",
+      flexDirection: "column",
     },
   },
 });
