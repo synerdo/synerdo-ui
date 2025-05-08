@@ -4,7 +4,7 @@ import { AccountMeta } from "./AccountMeta";
 import { ButtonContainer } from "./ButtonContainer";
 import { ButtonItem } from "./ButtonItem";
 import { ButtonMenu } from "./ButtonMenu";
-import { useUserStore } from "@/stores";
+import { useUsersStore } from "@/stores";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { BoxProps, IconButton } from "@mui/material";
@@ -18,7 +18,7 @@ export function AccountButton({ ...props }: BoxProps) {
 
   const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
 
-  const user = useUserStore((s) => s.user);
+  const user = useUsersStore((s) => s.user);
 
   const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);

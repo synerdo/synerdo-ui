@@ -1,12 +1,19 @@
 "use client";
 
-import { Container } from "@/components/protected";
+import { Container, RowBox } from "@/components/protected";
+import { RoomMeta, UsersList } from "@/components/room/settings";
 import { Typography } from "@mui/material";
 
 export default function RoomSettingsPage() {
   return (
     <Container>
-      <Typography variant="h4">Settings</Typography>
+      <RowBox mb={4}>
+        <Typography variant="h4">Settings</Typography>
+      </RowBox>
+
+      <RoomMeta />
+
+      <UsersList />
     </Container>
   );
 }

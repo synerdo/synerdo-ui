@@ -13,7 +13,7 @@ import { ItemLabel } from "./ItemLabel";
 import { ItemLink } from "./ItemLink";
 import { RoomsItemContainer } from "./RoomsItemContainer";
 import { IRoom } from "@/interfaces";
-import { useModalsStore, useUserStore } from "@/stores";
+import { useModalsStore, useUsersStore } from "@/stores";
 import { getColorsFromStr } from "@/utils";
 import { Box, MenuItemProps } from "@mui/material";
 import { useMemo } from "react";
@@ -23,7 +23,7 @@ interface RoomsItemProps {
 }
 
 export function RoomsItem({ room }: RoomsItemProps) {
-  const user = useUserStore((s) => s.user);
+  const user = useUsersStore((s) => s.user);
   const openModal = useModalsStore((s) => s.openModal);
 
   const hexColors = useMemo(
@@ -31,7 +31,7 @@ export function RoomsItem({ room }: RoomsItemProps) {
     [room.access_code]
   );
 
-  const isUserRoom = user?.id == room.owner;
+  const isOwner = user?.id === room.owner;
 
   const ownerActions: MenuItemProps[] = [
     {
@@ -73,7 +73,7 @@ export function RoomsItem({ room }: RoomsItemProps) {
           <Box>{room.name}</Box>
 
           <ItemActions
-            menuItems={isUserRoom ? ownerActions : participantActions}
+            menuItems={isOwner ? ownerActions : participantActions}
           />
         </ItemLabel>
       </ItemLink>

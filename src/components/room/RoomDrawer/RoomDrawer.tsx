@@ -9,19 +9,20 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useParams } from "next/navigation";
+import { useMemo } from "react";
 
 export const roomDrawerId = "room-drawer";
 
 export function RoomDrawer() {
   const p = useParams();
 
+  const roomId = useMemo(() => p["roomId"], [p]);
+
   const theme = useTheme();
 
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const closeDrawer = useDrawersStore((s) => s.closeDrawer);
-
-  const roomId = p["roomId"];
 
   const handleClick = () => {
     if (!isDesktop) {

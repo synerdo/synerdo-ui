@@ -34,6 +34,7 @@ export const THEME = responsiveFontSizes(
         palette: {
           white: {
             5: "rgba(255, 255, 255, 0.05)",
+            10: "rgba(255, 255, 255, 0.1)",
             20: "rgba(255, 255, 255, 0.2)",
             30: "rgba(255, 255, 255, 0.3)",
             40: "rgba(255, 255, 255, 0.4)",

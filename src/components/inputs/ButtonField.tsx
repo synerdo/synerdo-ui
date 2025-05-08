@@ -15,6 +15,7 @@ export function ButtonField<T extends FormikValues>({
   return (
     <Button
       {...props}
+      type="submit"
       fullWidth
       onClick={() => handleSubmit()}
       disabled={disabled ? !(isValid && dirty) : !isValid}
