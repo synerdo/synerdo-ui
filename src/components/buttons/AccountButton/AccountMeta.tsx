@@ -1,3 +1,5 @@
+"use client";
+
 import { SxStyle } from "@/classes";
 import { IUser } from "@/interfaces";
 import { Box, BoxProps, Typography } from "@mui/material";
@@ -17,15 +19,17 @@ export function AccountMeta({ user, ...props }: AccountMetaProps) {
 }
 
 const sxStyle = SxStyle.create({
-  container: {
+  container: (theme) => ({
     py: 0.75,
     pb: 1.75,
     px: 2,
-    borderBottomWidth: "1px",
-    borderBottomStyle: "solid",
-    borderBottomColor: "white.5",
     mb: 1,
-  },
+    borderBottom: "1px solid",
+    borderColor: "black.5",
+    ...theme.applyStyles("dark", {
+      borderColor: "white.5",
+    }),
+  }),
   username: {
     fontSize: "0.875rem",
     fontWeight: 600,

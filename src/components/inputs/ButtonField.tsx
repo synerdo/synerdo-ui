@@ -10,14 +10,13 @@ export function ButtonField<T extends FormikValues>({
   disabled = false,
   ...props
 }: ButtonFieldProps) {
-  const { handleSubmit, isValid, dirty } = useFormikContext<T>();
+  const { isValid, dirty } = useFormikContext<T>();
 
   return (
     <Button
       {...props}
       type="submit"
       fullWidth
-      onClick={() => handleSubmit()}
       disabled={disabled ? !(isValid && dirty) : !isValid}
     >
       {name}

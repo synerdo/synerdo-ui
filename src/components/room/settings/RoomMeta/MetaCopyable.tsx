@@ -3,7 +3,7 @@
 import { SxStyle } from "@/classes";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, Tooltip, Typography, TypographyProps } from "@mui/material";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export function MetaCopyable({ children, ...props }: TypographyProps) {
   const [copied, setCopied] = useState(false);
@@ -26,28 +26,8 @@ export function MetaCopyable({ children, ...props }: TypographyProps) {
     }
   };
 
-  const slotProps = useMemo(
-    () => ({
-      popper: {
-        modifiers: [
-          {
-            name: "offset",
-            options: {
-              offset: [0, -5],
-            },
-          },
-        ],
-      },
-    }),
-    []
-  );
-
   return (
-    <Tooltip
-      arrow
-      title={copied ? "Copied!" : "Click to copy"}
-      slotProps={slotProps}
-    >
+    <Tooltip arrow title={copied ? "Copied!" : "Click to copy"}>
       <Box sx={sxStyle.code}>
         <Typography {...props} onClick={handleCopy}>
           {children}
@@ -60,22 +40,29 @@ export function MetaCopyable({ children, ...props }: TypographyProps) {
 }
 
 const sxStyle = SxStyle.create({
-  code: {
-    display: "inline-flex",
+  code: (theme) => ({
     cursor: "pointer",
+    WebkitTapHighlightColor: "transparent",
+    display: "inline-flex",
     userSelect: "none",
     wordBreak: "break-all",
     px: 1,
     py: 0.5,
-    borderRadius: 1,
-    bgcolor: "white.10",
+    borderRadius: 2,
+    bgcolor: "black.5",
     transition: "background-color 0.3s ease",
     "&:hover": {
-      bgcolor: "white.20",
+      bgcolor: "black.10",
     },
-  },
+    ...theme.applyStyles("dark", {
+      bgcolor: "white.10",
+      "&:hover": {
+        bgcolor: "white.20",
+      },
+    }),
+  }),
   icon: {
     mt: 0.3,
-    ml: 1,
+    ml: 1.2,
   },
 });

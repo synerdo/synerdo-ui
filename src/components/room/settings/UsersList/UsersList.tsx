@@ -1,8 +1,8 @@
 "use client";
 
-import { ListCell, ListContainer, ListRow } from "../List";
 import { UsersItem } from "../UsersItem";
 import { UsersListContainer } from "./UsersListContainer";
+import { ListCell, ListContainer, ListRow } from "@/components/lists";
 import { useUsersStore } from "@/stores";
 import { Typography } from "@mui/material";
 
@@ -11,7 +11,7 @@ export function UsersList() {
 
   return users.length > 0 ? (
     <UsersListContainer>
-      <Typography variant="subtitle1" mb={2}>
+      <Typography variant="subtitle1" mb={1}>
         Participants:
       </Typography>
 

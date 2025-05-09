@@ -1,6 +1,7 @@
 "use client";
 
 import { Container, RowBox } from "@/components/protected";
+import { TasksList } from "@/components/room/tasks";
 import { Typography } from "@mui/material";
 
 export default function RoomPage() {
@@ -14,7 +15,7 @@ export default function RoomPage() {
         <Typography>TasksActions</Typography>
       </RowBox>
 
-      <Typography>TasksList</Typography>
+      <TasksList />
     </Container>
   );
 }

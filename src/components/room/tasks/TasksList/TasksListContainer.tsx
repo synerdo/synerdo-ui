@@ -1,18 +1,18 @@
 import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 
-export function ListRow({ children, ...props }: BoxProps) {
+export function TasksListContainer({ children, ...props }: BoxProps) {
   return (
-    <Box {...props} sx={sxStyle.row}>
+    <Box {...props} sx={sxStyle.container}>
       {children}
     </Box>
   );
 }
 
 const sxStyle = SxStyle.create({
-  row: {
+  container: {
     display: "flex",
-    flexDirection: "row",
-    borderColor: "white.10",
+    flexDirection: "column",
+    gap: 2,
   },
 });

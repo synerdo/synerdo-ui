@@ -1,3 +1,5 @@
+"use client";
+
 import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 
@@ -11,7 +13,7 @@ export function ListContainer({
   ...props
 }: ListContainerProps) {
   return (
-    <Box py={0.5} {...props} sx={sxStyle.outer}>
+    <Box {...props} sx={sxStyle.outer}>
       <Box minWidth={"500px"} {...innerProps} sx={sxStyle.inner}>
         {children}
       </Box>
@@ -25,10 +27,13 @@ const sxStyle = SxStyle.create({
     width: "100%",
     overflow: "auto hidden",
   },
-  inner: {
+  inner: (theme) => ({
     display: "block",
     width: "100%",
-    bgcolor: "white.10",
-    borderRadius: 1,
-  },
+    bgcolor: "black.5",
+    borderRadius: 2,
+    ...theme.applyStyles("dark", {
+      bgcolor: "white.10",
+    }),
+  }),
 });

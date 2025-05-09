@@ -42,6 +42,8 @@ export const THEME = responsiveFontSizes(
             100: "#fff",
           },
           black: {
+            5: "rgba(0, 0, 0, 0.05)",
+            10: "rgba(0, 0, 0, 0.1)",
             20: "rgba(0, 0, 0, 0.2)",
             30: "rgba(0, 0, 0, 0.3)",
             40: "rgba(0, 0, 0, 0.4)",

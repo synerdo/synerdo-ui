@@ -4,23 +4,23 @@ import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 
 interface RoomsItemContainer extends BoxProps {
-  hexColors: [string, string];
+  gradient: string;
 }
 
 export function RoomsItemContainer({
-  hexColors,
+  gradient,
   children,
   sx,
   ...props
 }: RoomsItemContainer) {
-  const [color1, color2] = hexColors;
-
-  const background = `linear-gradient(45deg, ${color1} 0%, ${color2} 100%)`;
-
   return (
     <Box
       {...props}
-      sx={[sxStyle.container, () => ({ ...sx }), () => ({ background })]}
+      sx={[
+        sxStyle.container,
+        () => ({ ...sx }),
+        () => ({ background: gradient }),
+      ]}
     >
       {children}
     </Box>

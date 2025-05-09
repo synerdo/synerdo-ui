@@ -1,6 +1,6 @@
 "use client";
 
-import { ListCell, ListRow } from "../List";
+import { ListCell, ListRow } from "@/components/lists";
 import { IUser } from "@/interfaces";
 import { useRoomsStore } from "@/stores";
 

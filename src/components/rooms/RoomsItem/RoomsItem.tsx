@@ -26,10 +26,11 @@ export function RoomsItem({ room }: RoomsItemProps) {
   const user = useUsersStore((s) => s.user);
   const openModal = useModalsStore((s) => s.openModal);
 
-  const hexColors = useMemo(
-    () => getColorsFromStr(String(room.access_code)),
-    [room.access_code]
-  );
+  const gradient = useMemo(() => {
+    const [color1, color2] = getColorsFromStr(`${room.access_code}`);
+
+    return `linear-gradient(45deg, ${color1} 0%, ${color2} 100%)`;
+  }, [room.access_code]);
 
   const isOwner = user?.id === room.owner;
 
@@ -67,7 +68,7 @@ export function RoomsItem({ room }: RoomsItemProps) {
   ];
 
   return (
-    <RoomsItemContainer hexColors={hexColors}>
+    <RoomsItemContainer gradient={gradient}>
       <ItemLink href={`/rooms/${room.id}`}>
         <ItemLabel>
           <Box>{room.name}</Box>

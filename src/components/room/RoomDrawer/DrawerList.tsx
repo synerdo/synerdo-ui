@@ -27,8 +27,11 @@ export function DrawerList({
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const subheaderBg = useMemo(
-    () => (isDesktop ? "background.primary" : "gray.800"),
-    [isDesktop]
+    () =>
+      isDesktop || theme.palette.mode === "light"
+        ? "background.primary"
+        : "gray.800",
+    [isDesktop, theme.palette.mode]
   );
 
   return (
