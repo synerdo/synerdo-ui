@@ -3,8 +3,10 @@
 import { Api } from "@/api";
 import { SxStyle } from "@/classes";
 import { InputField } from "@/components/inputs";
+import { ITokens } from "@/interfaces";
 import { ISigninFields, signinSchema } from "@/schemas";
 import { Link as MuiLink, Typography } from "@mui/material";
+import axios from "axios";
 import { Form, Formik, FormikHelpers } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,17 +26,27 @@ export function SigninForm() {
     const { resetForm } = formikHelpers;
 
     try {
-      const response = await Api.post("/auth/token/", values);
+      const response = await Api.post<ITokens>("/auth/token/", values);
       const tokens = response.data;
 
       localStorage.setItem("accessToken", tokens.access);
       localStorage.setItem("refreshToken", tokens.refresh);
 
-      router.push("/rooms");
+      router.replace("/rooms");
     } catch (err) {
-      console.error(err);
+      if (axios.isAxiosError(err) && err.response) {
+        const errors: Record<string, string> = {};
+        const touched: Record<string, boolean> = {};
 
-      resetForm();
+        errors["username"] = err.response.data.detail;
+        touched["username"] = true;
+
+        resetForm({ errors, touched });
+      } else {
+        console.error(err);
+
+        resetForm();
+      }
     }
   };
 

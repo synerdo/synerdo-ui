@@ -1,7 +1,8 @@
 import { HttpStatusCode } from "./httpStatusCode";
+import { ENV } from "@/constants";
 import axios from "axios";
 
-const baseURL = `${process.env.NEXT_PUBLIC_API_HOST || ""}/api`;
+const baseURL = `http://${ENV.apiHost}:${ENV.apiPort}/api`;
 
 export const Api = axios.create({
   headers: {
@@ -33,13 +34,15 @@ Api.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-      error.response.status === HttpStatusCode.UNAUTHORIZED &&
-      !originalRequest._retry
+      error?.response?.status === HttpStatusCode.UNAUTHORIZED &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/auth/token/refresh/")
     ) {
       originalRequest._retry = true;
 
       try {
         const refreshToken = localStorage.getItem("refreshToken") || "";
+
         const response = await Api.post("/auth/token/refresh/", {
           refresh: refreshToken,
         });

@@ -13,9 +13,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-interface ThemeButtonProps extends BoxProps {}
-
-export function ThemeButton({ sx, ...props }: ThemeButtonProps) {
+export function ThemeButton({ sx, ...props }: BoxProps) {
   const { mode, setMode } = useColorScheme();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
@@ -36,6 +34,7 @@ export function ThemeButton({ sx, ...props }: ThemeButtonProps) {
       <IconButton onClick={handleOpen}>
         <ContrastIcon />
       </IconButton>
+
       <Menu
         open={open}
         onClose={() => handleClose()}

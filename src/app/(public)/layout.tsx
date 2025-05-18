@@ -3,7 +3,7 @@ import { Banner } from "@/components/banners";
 import { ThemeButton } from "@/components/buttons";
 import { Logo } from "@/components/logos";
 import {
-  LayoutContainer,
+  Layout,
   LayoutGrid,
   LayoutColumn,
   PageContainer,
@@ -17,7 +17,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <LayoutContainer>
+    <Layout>
       <LayoutGrid>
         <LayoutColumn sx={sxStyle.bannerColumn}>
           <Banner sx={sxStyle.banner} />
@@ -35,7 +35,7 @@ export default function PublicLayout({
           </PageContainer>
         </LayoutColumn>
       </LayoutGrid>
-    </LayoutContainer>
+    </Layout>
   );
 }
 

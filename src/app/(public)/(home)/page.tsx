@@ -1,13 +1,13 @@
 "use client";
 
 import { SxStyle } from "@/classes";
-import { HomeContainer } from "@/components/home";
+import { Layout } from "@/components/home";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <HomeContainer>
+    <Layout>
       <Typography variant="h1" sx={sxStyle.itemSpacing}>
         Synergy does
       </Typography>
@@ -19,7 +19,7 @@ export default function HomePage() {
       <Button fullWidth LinkComponent={Link} href="/auth">
         Get Started
       </Button>
-    </HomeContainer>
+    </Layout>
   );
 }
 

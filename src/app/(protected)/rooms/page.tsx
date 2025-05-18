@@ -1,22 +1,52 @@
-"use client";
-
-import { Api } from "@/api";
-import { useEffect, useState } from "react";
+import { ThemeButton } from "@/components/buttons";
+import {
+  Container,
+  Header,
+  HeaderLogo,
+  RowBox,
+} from "@/components/protected";
+import {
+  Layout,
+  RoomsList,
+  RoomActions,
+  CreateModal,
+  EditModal,
+  DeleteModal,
+  JoinModal,
+  LeaveModal,
+} from "@/components/rooms";
+import { Typography } from "@mui/material";
 
 export default function RoomsPage() {
-  const [isAllowed, setIsAllowed] = useState(false);
+  return (
+    <Layout>
+      <Header>
+        <HeaderLogo href="/rooms" mr="auto" />
 
-  useEffect(() => {
-    (async () => {
-      try {
-        await Api.get("/accesstest/");
+        <ThemeButton />
+      </Header>
 
-        setIsAllowed(true);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
+      <Container>
+        <RowBox mb={4}>
+          <Typography variant="h4" mr={"auto"} mb={{ xs: 2, sm: 0 }}>
+            Rooms
+          </Typography>
 
-  return <h1>{isAllowed ? "Allowed" : "Not Allowed"}</h1>;
+          <RoomActions />
+        </RowBox>
+
+        <RoomsList />
+      </Container>
+
+      <JoinModal />
+
+      <CreateModal />
+
+      <EditModal />
+
+      <DeleteModal />
+
+      <LeaveModal />
+    </Layout>
+  );
 }

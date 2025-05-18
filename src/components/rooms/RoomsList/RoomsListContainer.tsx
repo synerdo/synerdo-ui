@@ -1,12 +1,7 @@
 import { SxStyle } from "@/classes";
 import { Box, BoxProps } from "@mui/material";
 
-interface LayoutContainerProps extends BoxProps {}
-
-export function LayoutContainer({
-  children,
-  ...props
-}: LayoutContainerProps) {
+export function RoomsListContainer({ children, ...props }: BoxProps) {
   return (
     <Box {...props} sx={sxStyle.container}>
       {children}
@@ -16,8 +11,9 @@ export function LayoutContainer({
 
 const sxStyle = SxStyle.create({
   container: {
-    flex: 1,
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: "20px",
   },
 });

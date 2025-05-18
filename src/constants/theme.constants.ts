@@ -3,8 +3,22 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
 
 declare module "@mui/material/styles" {
+  interface Theme {
+    general: Record<string, string | number>;
+  }
+
+  interface ThemeOptions {
+    general: Record<string, string | number>;
+  }
+
+  interface Palette {
+    white: Record<string, string>;
+    black: Record<string, string>;
+  }
+
   interface PaletteOptions {
-    transparent?: Record<string, PaletteOptions["primary"]>;
+    white: Record<string, string>;
+    black: Record<string, string>;
   }
 }
 
@@ -16,59 +30,66 @@ export const THEME = responsiveFontSizes(
     colorSchemes: {
       light: {
         palette: {
-          transparent: {
-            white: {
-              300: "rgba(255, 255, 255, 0.3)",
-              800: "rgba(255, 255, 255, 0.8)",
-            },
-            black: {
-              300: "rgba(0, 0, 0, 0.3)",
-              800: "rgba(0, 0, 0, 0.8)",
-            },
+          white: {
+            20: "rgba(255, 255, 255, 0.2)",
+            30: "rgba(255, 255, 255, 0.3)",
+            40: "rgba(255, 255, 255, 0.4)",
+            80: "rgba(255, 255, 255, 0.8)",
+            100: "#fff",
+          },
+          black: {
+            20: "rgba(0, 0, 0, 0.2)",
+            30: "rgba(0, 0, 0, 0.3)",
+            40: "rgba(0, 0, 0, 0.4)",
+            80: "rgba(0, 0, 0, 0.8)",
+            100: "#000",
           },
         },
       },
       dark: {},
+    },
+    general: {
+      containerWidth: 1400,
     },
     typography: {
       fontFamily: "var(--font-montserrat), 'Roboto', sans-serif",
       h1: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
         fontSize: "3rem",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       h2: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
         fontSize: "2.75rem",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       h3: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
         fontSize: "2.5rem",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       h4: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
         fontSize: "2rem",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       h5: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
         fontSize: "1.5rem",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       h6: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
         fontSize: "1.25rem",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       subtitle1: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       subtitle2: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
-        fontWeight: "700",
+        fontWeight: "600",
       },
       button: {
         fontFamily: "var(--font-poppins), 'Roboto', sans-serif",
