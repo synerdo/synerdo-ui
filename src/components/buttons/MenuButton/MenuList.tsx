@@ -1,10 +1,10 @@
 import { Menu, MenuItem, MenuItemProps, MenuProps } from "@mui/material";
 
-interface ActionsMenuProps extends MenuProps {
+interface MenuListProps extends MenuProps {
   menuItems: MenuItemProps[];
 }
 
-export function ActionsMenu({ menuItems, ...props }: ActionsMenuProps) {
+export function MenuList({ menuItems, ...props }: MenuListProps) {
   return (
     <Menu {...props}>
       {menuItems.map((menuItem, index) => (

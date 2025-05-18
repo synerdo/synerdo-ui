@@ -19,7 +19,7 @@ const sxStyle = SxStyle.create({
     right: 0,
     left: 0,
     px: {
-      xs: `${20}px`,
+      xs: `${16}px`,
       md: `${32}px`,
     },
     minHeight: "80px",

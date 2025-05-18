@@ -8,14 +8,15 @@ import {
   ILeaveModalData,
   leaveModalId,
 } from "../modals";
-import { ItemActions } from "./ItemActions";
 import { ItemLabel } from "./ItemLabel";
 import { ItemLink } from "./ItemLink";
+import { ItemTitle } from "./ItemTitle";
 import { RoomsItemContainer } from "./RoomsItemContainer";
+import { MenuButton } from "@/components/buttons";
 import { IRoom } from "@/interfaces";
 import { useModalsStore, useUsersStore } from "@/stores";
 import { getColorsFromStr } from "@/utils";
-import { Box, MenuItemProps } from "@mui/material";
+import { MenuItemProps, useMediaQuery, useTheme } from "@mui/material";
 import { useMemo } from "react";
 
 interface RoomsItemProps {
@@ -23,6 +24,15 @@ interface RoomsItemProps {
 }
 
 export function RoomsItem({ room }: RoomsItemProps) {
+  const theme = useTheme();
+
+  const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const iconSize = useMemo(
+    () => (isTablet ? "medium" : "small"),
+    [isTablet]
+  );
+
   const user = useUsersStore((s) => s.user);
   const openModal = useModalsStore((s) => s.openModal);
 
@@ -71,9 +81,10 @@ export function RoomsItem({ room }: RoomsItemProps) {
     <RoomsItemContainer gradient={gradient}>
       <ItemLink href={`/rooms/${room.id}`}>
         <ItemLabel>
-          <Box>{room.name}</Box>
+          <ItemTitle>{room.name}</ItemTitle>
 
-          <ItemActions
+          <MenuButton
+            iconSize={iconSize}
             menuItems={isOwner ? ownerActions : participantActions}
           />
         </ItemLabel>

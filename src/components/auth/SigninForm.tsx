@@ -10,9 +10,12 @@ import axios from "axios";
 import { Form, Formik, FormikHelpers } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function SigninForm() {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const initialValues = {
     username: "",
@@ -24,6 +27,8 @@ export function SigninForm() {
     formikHelpers: FormikHelpers<ISigninFields>
   ) => {
     const { resetForm } = formikHelpers;
+
+    setIsLoading(true);
 
     try {
       const response = await Api.post<ITokens>("/auth/token/", values);
@@ -48,6 +53,8 @@ export function SigninForm() {
         resetForm();
       }
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -74,7 +81,8 @@ export function SigninForm() {
         <InputField
           disabled
           type="button"
-          name="Sign in"
+          name={isLoading ? "Loading..." : "Sign in"}
+          isLoading={isLoading}
           sx={sxStyle.itemSpacing}
         />
 

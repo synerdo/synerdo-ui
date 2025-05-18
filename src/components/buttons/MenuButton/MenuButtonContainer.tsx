@@ -1,5 +1,5 @@
 import { Box, BoxProps } from "@mui/material";
 
-export function ItemActionsContainer({ children, ...props }: BoxProps) {
+export function MenuButtonContainer({ children, ...props }: BoxProps) {
   return <Box {...props}>{children}</Box>;
 }

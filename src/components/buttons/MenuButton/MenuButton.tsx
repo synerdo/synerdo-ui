@@ -1,16 +1,21 @@
 "use client";
 
-import { ActionsButton } from "./ActionsButton";
-import { ActionsMenu } from "./ActionsMenu";
-import { ItemActionsContainer } from "./ItemActionsContainer";
+import { MenuButtonContainer } from "./MenuButtonContainer";
+import { MenuIcon } from "./MenuIcon";
+import { MenuList } from "./MenuList";
 import { BoxProps, MenuItemProps } from "@mui/material";
 import { MouseEvent, useState } from "react";
 
-interface ItemActions extends Omit<BoxProps, "children"> {
+interface MenuButtonProps extends Omit<BoxProps, "children"> {
   menuItems: MenuItemProps[];
+  iconSize?: "inherit" | "large" | "medium" | "small";
 }
 
-export function ItemActions({ menuItems, ...props }: ItemActions) {
+export function MenuButton({
+  menuItems,
+  iconSize,
+  ...props
+}: MenuButtonProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -27,10 +32,10 @@ export function ItemActions({ menuItems, ...props }: ItemActions) {
   };
 
   return (
-    <ItemActionsContainer {...props}>
-      <ActionsButton onClick={handleButtonClick} />
+    <MenuButtonContainer {...props}>
+      <MenuIcon iconSize={iconSize} onClick={handleButtonClick} />
 
-      <ActionsMenu
+      <MenuList
         open={isMenuOpen}
         onClose={handleMenuClick}
         onClick={handleMenuClick}
@@ -45,6 +50,6 @@ export function ItemActions({ menuItems, ...props }: ItemActions) {
         }}
         menuItems={menuItems}
       />
-    </ItemActionsContainer>
+    </MenuButtonContainer>
   );
 }

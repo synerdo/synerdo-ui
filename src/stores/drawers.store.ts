@@ -8,9 +8,13 @@ export interface DrawerState<T = unknown> {
 
 export interface DrawersState {
   openDrawers: Record<string, DrawerState>;
+
   openDrawer: <T>(drawerId: string, drawerData?: T) => void;
+
   closeDrawer: (drawerId: string) => void;
+
   getDrawerData: <T>(drawerId: string) => T | undefined;
+
   getIsDrawerOpen: (drawerId: string) => boolean;
 }
 

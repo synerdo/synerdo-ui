@@ -51,12 +51,16 @@ export function ItemHead({
 
 const sxStyle = SxStyle.create({
   head: (theme) => ({
-    cursor: "pointer",
-    WebkitTapHighlightColor: "transparent",
     overflow: "hidden",
-    px: 1,
+    px: {
+      xs: 0.5,
+      sm: 1,
+    },
     width: "100%",
-    minHeight: "60px",
+    minHeight: {
+      xs: "56px",
+      sm: "60px",
+    },
     display: "flex",
     flexDirection: "row",
     justifyContent: "stretch",
@@ -78,9 +82,13 @@ const sxStyle = SxStyle.create({
     }),
   }),
   button: {
-    px: 1,
+    px: {
+      xs: 0.5,
+      sm: 1,
+    },
     flex: 1,
     justifyContent: "stretch",
     alignSelf: "stretch",
+    minWidth: "0",
   },
 });

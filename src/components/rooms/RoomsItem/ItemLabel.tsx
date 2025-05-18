@@ -16,7 +16,7 @@ const sxStyle = SxStyle.create({
     color: "white.100",
     fontWeight: "500",
     pl: 2,
-    pr: 2,
+    pr: 1,
     mt: "auto",
     minHeight: "60px",
     display: "flex",

@@ -7,9 +7,13 @@ interface ModalState<T = unknown> {
 
 interface ModalsState {
   openModals: Record<string, ModalState>;
+
   openModal: <T>(modalId: string, modalData?: T) => void;
+
   closeModal: (modalId: string) => void;
+
   getModalData: <T>(modalId: string) => T | undefined;
+
   getIsModalOpen: (modalId: string) => boolean;
 }
 

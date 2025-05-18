@@ -1,11 +1,4 @@
-import { ThemeButton } from "@/components/buttons";
-import {
-  Container,
-  Header,
-  HeaderLogo,
-  RowBox,
-  Layout,
-} from "@/components/protected";
+import { Container, Header, RowBox, Layout } from "@/components/protected";
 import {
   RoomsList,
   RoomsActions,

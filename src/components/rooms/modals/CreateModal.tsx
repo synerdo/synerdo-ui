@@ -47,7 +47,7 @@ export function CreateModal() {
           <InputField<IRoomFields>
             type="text"
             name="name"
-            label="Room name"
+            label="Name"
             sx={sxStyle.itemSpacing}
           />
 

@@ -41,12 +41,15 @@ const sxStyle = SxStyle.create({
     width: "100%",
     borderRadius: 2,
     overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
     transition: "border-radius 0.2s ease",
     bgcolor: "black.5",
-    boxShadow: `inset 0 2px 5px ${theme.palette.black[5]}`,
+    boxShadow: `inset 0 1px 1px ${theme.palette.black[5]}`,
     ...theme.applyStyles("dark", {
       bgcolor: "white.10",
-      boxShadow: `inset 0 2px 5px ${theme.palette.black[20]}`,
+      boxShadow: `inset 0 1px 1px ${theme.palette.black[20]}`,
     }),
   }),
 });

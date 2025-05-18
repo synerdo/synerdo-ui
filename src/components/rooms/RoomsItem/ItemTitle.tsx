@@ -15,7 +15,6 @@ const sxStyle = SxStyle.create({
       xs: "0.875rem",
       sm: "1rem",
     },
-    mr: 1,
     fontWeight: 500,
     whiteSpace: "nowrap",
     overflow: "hidden",

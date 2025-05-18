@@ -3,8 +3,11 @@ import { create } from "zustand";
 
 interface UsersStore {
   users: IUser[];
+
   setUsers: (users: IUser[]) => void;
+
   user: IUser | null;
+
   setUser: (user: IUser) => void;
 }
 

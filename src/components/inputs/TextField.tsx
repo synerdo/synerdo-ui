@@ -25,7 +25,7 @@ export function TextField<T extends FormikValues>({
       value={String(values[name])}
       onChange={handleChange}
       onBlur={handleBlur}
-      error={isError ? true : false}
+      error={!!isError}
       helperText={` ${isError ? String(errors[name]) : ""}`}
     />
   );

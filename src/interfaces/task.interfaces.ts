@@ -1,7 +1,7 @@
 import { TTaskPriority } from "@/types";
 
 export interface ITask {
-  id: 0;
+  id: number;
   title: string;
   text: string;
   is_done: boolean;

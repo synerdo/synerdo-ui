@@ -3,11 +3,17 @@ import { create } from "zustand";
 
 interface RoomsStore {
   rooms: IRoom[];
+
   setRooms: (rooms: IRoom[]) => void;
+
   addRoom: (room: IRoom) => void;
+
   updateRoom: (room: IRoom) => void;
+
   removeRoom: (roomId: number) => void;
+
   room: IRoom | null;
+
   setRoom: (room: IRoom) => void;
 }
 
