@@ -22,22 +22,21 @@ export function CreateModal() {
   const roomId = useMemo(() => p["roomId"], [p]);
 
   const closeModal = useModalsStore((s) => s.closeModal);
-
   const addTask = useTasksStore((s) => s.addTask);
 
-  const selectItems: MenuItemProps[] = Object.values(ETaskPriority).map(
-    (item) => ({
-      value: item,
-      children: item,
+  const selectItems: MenuItemProps[] = Object.entries(ETaskPriority).map(
+    ([label, value]) => ({
+      children: label,
+      value: value,
     })
   );
 
   const initialValues: ITaskFields = {
     title: "",
-    text: "",
-    due_to_date: new Date(),
-    due_to_time: new Date(),
-    priority: selectItems[0].value as ETaskPriority,
+    text: null,
+    due_to_date: null,
+    due_to_time: null,
+    priority: ETaskPriority.None,
   };
 
   const handleSubmit = async (
@@ -47,8 +46,14 @@ export function CreateModal() {
     try {
       const mappedValues = {
         ...values,
-        due_to_date: getDateString(values.due_to_date),
-        due_to_time: getTimeString(values.due_to_time),
+        text: values.text ? values.text : null,
+        due_to_date: values.due_to_date
+          ? getDateString(values.due_to_date)
+          : null,
+        due_to_time: values.due_to_time
+          ? getTimeString(values.due_to_time)
+          : null,
+        priority: values.priority !== "null" ? values.priority : null,
       };
 
       const response = await Api.post<ITask>(
@@ -72,45 +77,49 @@ export function CreateModal() {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <InputField<ITaskFields>
-            type="text"
-            name="title"
-            label="Title"
-            sx={sxStyle.itemSpacing}
-          />
+        {({ values }) => (
+          <Form>
+            <InputField<ITaskFields>
+              type="text"
+              name="title"
+              label="Title"
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField<ITaskFields>
-            type="textarea"
-            name="text"
-            label="Text"
-            sx={sxStyle.itemSpacing}
-          />
+            <InputField<ITaskFields>
+              type="textarea"
+              name="text"
+              label="Text"
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField<ITaskFields>
-            type="date"
-            name="due_to_date"
-            label="Due date"
-            sx={sxStyle.itemSpacing}
-          />
+            <InputField<ITaskFields>
+              type="date"
+              name="due_to_date"
+              label="Due date"
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField<ITaskFields>
-            type="time"
-            name="due_to_time"
-            label="Due time"
-            sx={sxStyle.itemSpacing}
-          />
+            {values.due_to_date ? (
+              <InputField<ITaskFields>
+                type="time"
+                name="due_to_time"
+                label="Due time"
+                sx={sxStyle.itemSpacing}
+              />
+            ) : null}
 
-          <InputField<ITaskFields>
-            type="select"
-            name="priority"
-            label="Priority"
-            menuItems={selectItems}
-            sx={sxStyle.itemSpacing}
-          />
+            <InputField<ITaskFields>
+              type="select"
+              name="priority"
+              label="Priority"
+              menuItems={selectItems}
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField disabled type="button" name="Create task" />
-        </Form>
+            <InputField disabled type="button" name="Create task" />
+          </Form>
+        )}
       </Formik>
     </Modal>
   );

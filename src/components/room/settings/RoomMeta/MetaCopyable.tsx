@@ -5,18 +5,21 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, Tooltip, Typography, TypographyProps } from "@mui/material";
 import { useRef, useState } from "react";
 
-export function MetaCopyable({ children, ...props }: TypographyProps) {
+interface MetaCopyableProps extends TypographyProps {
+  children: string;
+}
+
+export function MetaCopyable({ children, ...props }: MetaCopyableProps) {
   const [copied, setCopied] = useState(false);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleCopy = async (e: React.MouseEvent<HTMLParagraphElement>) => {
+  const handleCopy = async (code: string) => {
     try {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
 
-      const code = e.currentTarget.textContent || "";
       await navigator.clipboard.writeText(code);
 
       setCopied(true);
@@ -28,10 +31,8 @@ export function MetaCopyable({ children, ...props }: TypographyProps) {
 
   return (
     <Tooltip arrow title={copied ? "Copied!" : "Click to copy"}>
-      <Box sx={sxStyle.code}>
-        <Typography {...props} onClick={handleCopy}>
-          {children}
-        </Typography>
+      <Box sx={sxStyle.code} onClick={() => handleCopy(children)}>
+        <Typography {...props}>{children}</Typography>
 
         <ContentCopyIcon fontSize="small" sx={sxStyle.icon} />
       </Box>

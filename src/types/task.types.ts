@@ -1,7 +1,8 @@
 export enum ETaskPriority {
-  LOW = "L",
-  MEDIUM = "M",
-  HIGH = "H",
+  None = "null",
+  Low = "L",
+  Medium = "M",
+  High = "H",
 }
 
 export type TTaskPriority = `${ETaskPriority}`;

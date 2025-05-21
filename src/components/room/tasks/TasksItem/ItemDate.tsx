@@ -24,11 +24,11 @@ export function ItemDate({
     [isExpired, theme.palette.mode]
   );
 
-  return (
+  return children ? (
     <Typography {...props} sx={{ ...sxStyle.date, ...expiredSx }}>
       {children}
     </Typography>
-  );
+  ) : null;
 }
 
 const sxStyle = SxStyle.create({

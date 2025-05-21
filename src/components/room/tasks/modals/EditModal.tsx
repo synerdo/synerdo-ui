@@ -19,10 +19,10 @@ export const editModalId = "edit-task";
 export interface IEditModalData {
   taskId: number;
   title: string;
-  text: string;
-  due_to_date: string;
-  due_to_time: string;
-  priority: TTaskPriority;
+  text: string | null;
+  due_to_date: string | null;
+  due_to_time: string | null;
+  priority: TTaskPriority | null;
 }
 
 export function EditModal() {
@@ -33,28 +33,27 @@ export function EditModal() {
   const modalData = useModalsStore((state) =>
     state.getModalData<IEditModalData>(editModalId)
   );
-
   const closeModal = useModalsStore((s) => s.closeModal);
-
   const updateTask = useTasksStore((s) => s.updateTask);
 
-  const selectItems: MenuItemProps[] = Object.values(ETaskPriority).map(
-    (item) => ({
-      value: item,
-      children: item,
+  const selectItems: MenuItemProps[] = Object.entries(ETaskPriority).map(
+    ([label, value]) => ({
+      children: label,
+      value: value,
     })
-  );
-
-  const taskDate = new Date(
-    `${modalData?.due_to_date}:${modalData?.due_to_time}`
   );
 
   const initialValues: ITaskFields = {
     title: modalData?.title || "",
-    text: modalData?.text || "",
-    due_to_date: taskDate,
-    due_to_time: taskDate,
-    priority: modalData?.priority,
+    text: modalData?.text || null,
+    due_to_date: modalData?.due_to_date
+      ? new Date(`${modalData?.due_to_date}`)
+      : null,
+    due_to_time:
+      modalData?.due_to_date && modalData?.due_to_time
+        ? new Date(`${modalData?.due_to_date}:${modalData?.due_to_time}`)
+        : null,
+    priority: modalData?.priority || ETaskPriority.None,
   };
 
   const handleSubmit = async (
@@ -69,8 +68,14 @@ export function EditModal() {
 
       const mappedValues = {
         ...values,
-        due_to_date: getDateString(values.due_to_date),
-        due_to_time: getTimeString(values.due_to_time),
+        text: values.text ? values.text : null,
+        due_to_date: values.due_to_date
+          ? getDateString(values.due_to_date)
+          : null,
+        due_to_time: values.due_to_time
+          ? getTimeString(values.due_to_time)
+          : null,
+        priority: values.priority !== "null" ? values.priority : null,
       };
 
       const response = await Api.patch<ITask>(
@@ -94,45 +99,49 @@ export function EditModal() {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <InputField<ITaskFields>
-            type="text"
-            name="title"
-            label="Title"
-            sx={sxStyle.itemSpacing}
-          />
+        {({ values }) => (
+          <Form>
+            <InputField<ITaskFields>
+              type="text"
+              name="title"
+              label="Title"
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField<ITaskFields>
-            type="textarea"
-            name="text"
-            label="Text"
-            sx={sxStyle.itemSpacing}
-          />
+            <InputField<ITaskFields>
+              type="textarea"
+              name="text"
+              label="Text"
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField<ITaskFields>
-            type="date"
-            name="due_to_date"
-            label="Due date"
-            sx={sxStyle.itemSpacing}
-          />
+            <InputField<ITaskFields>
+              type="date"
+              name="due_to_date"
+              label="Due date"
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField<ITaskFields>
-            type="time"
-            name="due_to_time"
-            label="Due time"
-            sx={sxStyle.itemSpacing}
-          />
+            {values.due_to_date ? (
+              <InputField<ITaskFields>
+                type="time"
+                name="due_to_time"
+                label="Due time"
+                sx={sxStyle.itemSpacing}
+              />
+            ) : null}
 
-          <InputField<ITaskFields>
-            type="select"
-            name="priority"
-            label="Priority"
-            menuItems={selectItems}
-            sx={sxStyle.itemSpacing}
-          />
+            <InputField<ITaskFields>
+              type="select"
+              name="priority"
+              label="Priority"
+              menuItems={selectItems}
+              sx={sxStyle.itemSpacing}
+            />
 
-          <InputField disabled type="button" name="Edit task" />
-        </Form>
+            <InputField disabled type="button" name="Edit task" />
+          </Form>
+        )}
       </Formik>
     </Modal>
   );

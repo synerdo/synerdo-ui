@@ -4,7 +4,7 @@ import { Box, BoxProps } from "@mui/material";
 import { useMemo } from "react";
 
 interface ItemPriorityProps extends BoxProps {
-  priority?: TTaskPriority;
+  priority?: TTaskPriority | null;
 }
 
 export function ItemPriority({ priority, ...props }: ItemPriorityProps) {
@@ -20,7 +20,9 @@ export function ItemPriority({ priority, ...props }: ItemPriorityProps) {
     [priority]
   );
 
-  return <Box {...props} sx={{ ...sxStyle.priority, ...prioritySx }} />;
+  return priority ? (
+    <Box {...props} sx={{ ...sxStyle.priority, ...prioritySx }} />
+  ) : null;
 }
 
 const sxStyle = SxStyle.create({
