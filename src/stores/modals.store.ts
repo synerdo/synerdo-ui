@@ -7,9 +7,13 @@ interface ModalState<T = unknown> {
 
 interface ModalsState {
   openModals: Record<string, ModalState>;
+
   openModal: <T>(modalId: string, modalData?: T) => void;
+
   closeModal: (modalId: string) => void;
+
   getModalData: <T>(modalId: string) => T | undefined;
+
   getIsModalOpen: (modalId: string) => boolean;
 }
 
@@ -26,10 +30,13 @@ export const useModalsStore = create<ModalsState>((set, get) => ({
 
   closeModal: (modalId: string) =>
     set((state) => {
-      const newOpenModals = { ...state.openModals };
-      delete newOpenModals[modalId];
+      state.openModals[modalId].isOpen = false;
 
-      return { openModals: newOpenModals };
+      setTimeout(() => {
+        delete state.openModals[modalId];
+      }, 300);
+
+      return { openModals: state.openModals };
     }),
 
   getModalData: <T>(modalId: string): T | undefined => {

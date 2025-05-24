@@ -18,9 +18,9 @@ export function LeaveModal() {
   const modalData = useModalsStore((state) =>
     state.getModalData<ILeaveModalData>(leaveModalId)
   );
-  const closeModal = useModalsStore((state) => state.closeModal);
+  const closeModal = useModalsStore((s) => s.closeModal);
 
-  const removeRoom = useRoomsStore((state) => state.removeRoom);
+  const removeRoom = useRoomsStore((s) => s.removeRoom);
 
   const handleClick = async () => {
     try {

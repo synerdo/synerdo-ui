@@ -5,7 +5,7 @@ import { useModalsStore } from "@/stores";
 import { Button, ButtonProps } from "@mui/material";
 
 export function JoinButton({ ...props }: ButtonProps) {
-  const openModal = useModalsStore((state) => state.openModal);
+  const openModal = useModalsStore((s) => s.openModal);
 
   const handleClick = () => {
     openModal(joinModalId);

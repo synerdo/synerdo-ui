@@ -15,8 +15,8 @@ interface ModalProps extends Omit<DialogProps, "open"> {
 }
 
 export function Modal({ id, title, children, ...props }: ModalProps) {
-  const isOpen = useModalsStore((state) => state.getIsModalOpen(id));
-  const closeModal = useModalsStore((state) => state.closeModal);
+  const isOpen = useModalsStore((s) => s.getIsModalOpen(id));
+  const closeModal = useModalsStore((s) => s.closeModal);
 
   const handleClose = () => {
     closeModal(id);

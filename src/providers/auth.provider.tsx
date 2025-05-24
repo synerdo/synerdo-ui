@@ -2,7 +2,7 @@
 
 import { Api } from "@/api";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -10,6 +10,8 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -20,10 +22,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       } catch (err) {
         console.error(err);
       }
+
+      setIsLoading(false);
     };
 
     checkAuth();
   }, [router]);
 
-  return children;
+  return isLoading ? null : children;
 }

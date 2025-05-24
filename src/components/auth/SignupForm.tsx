@@ -9,9 +9,12 @@ import axios from "axios";
 import { Form, Formik, FormikHelpers } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function SignupForm() {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const initialValues = {
     email: "",
@@ -24,6 +27,8 @@ export function SignupForm() {
     formikHelpers: FormikHelpers<ISignupFields>
   ) => {
     const { resetForm } = formikHelpers;
+
+    setIsLoading(true);
 
     try {
       await Api.post("/auth/register/", values);
@@ -47,6 +52,8 @@ export function SignupForm() {
         resetForm();
       }
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -80,7 +87,8 @@ export function SignupForm() {
         <InputField
           disabled
           type="button"
-          name="Sign up"
+          name={isLoading ? "Loading..." : "Sign up"}
+          isLoading={isLoading}
           sx={sxStyle.itemSpacing}
         />
 
