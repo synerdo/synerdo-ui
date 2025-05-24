@@ -16,7 +16,7 @@ export function RoomMeta() {
       </MetaSection>
 
       <MetaSection title="Access code:">
-        <MetaCopyable>{room?.access_code}</MetaCopyable>
+        <MetaCopyable>{room?.access_code || ""}</MetaCopyable>
       </MetaSection>
     </RoomMetaContainer>
   );
