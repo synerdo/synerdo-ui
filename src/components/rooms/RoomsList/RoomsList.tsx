@@ -7,7 +7,7 @@ import { useRoomsStore } from "@/stores";
 import { Typography } from "@mui/material";
 
 export function RoomsList() {
-  const rooms = useRoomsStore((state) => state.rooms);
+  const rooms = useRoomsStore((s) => s.rooms);
 
   useFetchRooms();
 

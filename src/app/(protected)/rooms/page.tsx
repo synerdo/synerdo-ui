@@ -1,14 +1,7 @@
-import { ThemeButton } from "@/components/buttons";
+import { Container, Header, RowBox, Layout } from "@/components/protected";
 import {
-  Container,
-  Header,
-  HeaderLogo,
-  RowBox,
-} from "@/components/protected";
-import {
-  Layout,
   RoomsList,
-  RoomActions,
+  RoomsActions,
   CreateModal,
   EditModal,
   DeleteModal,
@@ -20,11 +13,7 @@ import { Typography } from "@mui/material";
 export default function RoomsPage() {
   return (
     <Layout>
-      <Header>
-        <HeaderLogo href="/rooms" mr="auto" />
-
-        <ThemeButton />
-      </Header>
+      <Header />
 
       <Container>
         <RowBox mb={4}>
@@ -32,7 +21,7 @@ export default function RoomsPage() {
             Rooms
           </Typography>
 
-          <RoomActions />
+          <RoomsActions />
         </RowBox>
 
         <RoomsList />

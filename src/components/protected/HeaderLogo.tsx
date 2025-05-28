@@ -27,7 +27,7 @@ export function HeaderLogo({ href, sx, ...props }: HeaderLogoProps) {
 const sxStyle = SxStyle.create({
   logo: {
     width: "150px",
-    height: "100%",
+    height: "auto",
   },
   link: {
     display: "block",

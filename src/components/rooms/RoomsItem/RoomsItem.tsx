@@ -8,25 +8,41 @@ import {
   ILeaveModalData,
   leaveModalId,
 } from "../modals";
-import { ItemActions } from "./ItemActions";
 import { ItemLabel } from "./ItemLabel";
 import { ItemLink } from "./ItemLink";
+import { ItemTitle } from "./ItemTitle";
 import { RoomsItemContainer } from "./RoomsItemContainer";
+import { MenuButton } from "@/components/buttons";
 import { IRoom } from "@/interfaces";
-import { useModalsStore, useUserStore } from "@/stores";
-import { getHexColors } from "@/utils";
-import { Box, MenuItemProps } from "@mui/material";
+import { useModalsStore, useUsersStore } from "@/stores";
+import { getColorsFromStr } from "@/utils";
+import { MenuItemProps, useMediaQuery, useTheme } from "@mui/material";
+import { useMemo } from "react";
 
 interface RoomsItemProps {
   room: IRoom;
 }
 
 export function RoomsItem({ room }: RoomsItemProps) {
-  const user = useUserStore((state) => state.user);
-  const openModal = useModalsStore((state) => state.openModal);
-  const hexColors = getHexColors(String(room.access_code));
+  const theme = useTheme();
 
-  const isUserRoom = user?.id == room.owner;
+  const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const iconSize = useMemo(
+    () => (isTablet ? "medium" : "small"),
+    [isTablet]
+  );
+
+  const user = useUsersStore((s) => s.user);
+  const openModal = useModalsStore((s) => s.openModal);
+
+  const gradient = useMemo(() => {
+    const [color1, color2] = getColorsFromStr(`${room.access_code}`);
+
+    return `linear-gradient(45deg, ${color1} 0%, ${color2} 100%)`;
+  }, [room.access_code]);
+
+  const isOwner = user?.id === room.owner;
 
   const ownerActions: MenuItemProps[] = [
     {
@@ -62,13 +78,14 @@ export function RoomsItem({ room }: RoomsItemProps) {
   ];
 
   return (
-    <RoomsItemContainer hexColors={hexColors}>
+    <RoomsItemContainer gradient={gradient}>
       <ItemLink href={`/rooms/${room.id}`}>
         <ItemLabel>
-          <Box>{room.name}</Box>
+          <ItemTitle>{room.name}</ItemTitle>
 
-          <ItemActions
-            menuItems={isUserRoom ? ownerActions : participantActions}
+          <MenuButton
+            iconSize={iconSize}
+            menuItems={isOwner ? ownerActions : participantActions}
           />
         </ItemLabel>
       </ItemLink>

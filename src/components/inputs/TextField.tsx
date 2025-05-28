@@ -22,10 +22,10 @@ export function TextField<T extends FormikValues>({
       {...props}
       fullWidth
       name={name}
-      value={String(values[name])}
+      value={values[name] || ""}
       onChange={handleChange}
       onBlur={handleBlur}
-      error={isError ? true : false}
+      error={!!isError}
       helperText={` ${isError ? String(errors[name]) : ""}`}
     />
   );
