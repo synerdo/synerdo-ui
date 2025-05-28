@@ -1,6 +1,5 @@
-import { HttpStatusCode } from "./httpStatusCode";
 import { ENV } from "@/constants";
-import axios from "axios";
+import axios, { HttpStatusCode } from "axios";
 
 const baseURL = `http://${ENV.apiHost}:${ENV.apiPort}/api`;
 
@@ -34,7 +33,7 @@ Api.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-      error?.response?.status === HttpStatusCode.UNAUTHORIZED &&
+      error?.response?.status === HttpStatusCode.Unauthorized &&
       !originalRequest._retry &&
       !originalRequest.url.includes("/auth/token/refresh/")
     ) {
