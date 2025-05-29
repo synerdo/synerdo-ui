@@ -8,7 +8,7 @@ import { ITask } from "@/interfaces";
 import { ITaskFields, taskSchema } from "@/schemas";
 import { useModalsStore, useTasksStore } from "@/stores";
 import { ETaskPriority, TTaskPriority } from "@/types";
-import { getDateString, getTimeString } from "@/utils";
+import { getDateStr, getTimeStr, parseDueDateTime } from "@/utils";
 import { MenuItemProps } from "@mui/material";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useParams } from "next/navigation";
@@ -43,16 +43,16 @@ export function EditModal() {
     })
   );
 
+  const { dueToDate, dueToTime } = parseDueDateTime(
+    modalData?.due_to_date,
+    modalData?.due_to_time
+  );
+
   const initialValues: ITaskFields = {
     title: modalData?.title || "",
     text: modalData?.text || null,
-    due_to_date: modalData?.due_to_date
-      ? new Date(`${modalData?.due_to_date}`)
-      : null,
-    due_to_time:
-      modalData?.due_to_date && modalData?.due_to_time
-        ? new Date(`${modalData?.due_to_date}:${modalData?.due_to_time}`)
-        : null,
+    due_to_date: dueToDate,
+    due_to_time: dueToTime,
     priority: modalData?.priority || ETaskPriority.None,
   };
 
@@ -70,10 +70,10 @@ export function EditModal() {
         ...values,
         text: values.text ? values.text : null,
         due_to_date: values.due_to_date
-          ? getDateString(values.due_to_date)
+          ? getDateStr(values.due_to_date)
           : null,
         due_to_time: values.due_to_time
-          ? getTimeString(values.due_to_time)
+          ? getTimeStr(values.due_to_time)
           : null,
         priority: values.priority !== "null" ? values.priority : null,
       };

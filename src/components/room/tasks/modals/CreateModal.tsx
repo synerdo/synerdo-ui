@@ -8,7 +8,7 @@ import { ITask } from "@/interfaces";
 import { ITaskFields, taskSchema } from "@/schemas";
 import { useModalsStore, useTasksStore } from "@/stores";
 import { ETaskPriority } from "@/types";
-import { getDateString, getTimeString } from "@/utils";
+import { getDateStr, getTimeStr } from "@/utils";
 import { MenuItemProps } from "@mui/material";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useParams } from "next/navigation";
@@ -46,12 +46,12 @@ export function CreateModal() {
     try {
       const mappedValues = {
         ...values,
-        text: values.text ? values.text : null,
+        text: values.text && values.text.trim() ? values.text : null,
         due_to_date: values.due_to_date
-          ? getDateString(values.due_to_date)
+          ? getDateStr(values.due_to_date)
           : null,
         due_to_time: values.due_to_time
-          ? getTimeString(values.due_to_time)
+          ? getTimeStr(values.due_to_time)
           : null,
         priority: values.priority !== "null" ? values.priority : null,
       };

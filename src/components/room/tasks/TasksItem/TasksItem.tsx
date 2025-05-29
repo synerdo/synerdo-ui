@@ -109,7 +109,7 @@ export function TasksItem({ task }: TasksItemProps) {
         rightItem={
           <>
             <ItemDate isExpired={isExpired}>
-              {formatDate(`${task.due_to_date}`)}
+              {formatDate(task.due_to_date)}
             </ItemDate>
 
             <MenuButton iconSize={iconSize} menuItems={taskActions} />
@@ -128,11 +128,9 @@ export function TasksItem({ task }: TasksItemProps) {
         <ItemField title="Creator:">{creator?.username}</ItemField>
 
         <ItemField title="Due to:">
-          {formatFullDate(
-            task.due_to_time
-              ? `${task.due_to_date}:${task.due_to_time}`
-              : `${task.due_to_date}`
-          )}
+          {task.due_to_time
+            ? formatFullDate(task.due_to_date, task.due_to_time)
+            : formatDate(task.due_to_date)}
         </ItemField>
 
         <ItemField title="Description:">{task.text}</ItemField>
