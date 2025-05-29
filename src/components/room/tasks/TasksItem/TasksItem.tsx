@@ -128,7 +128,9 @@ export function TasksItem({ task }: TasksItemProps) {
         <ItemField title="Creator:">{creator?.username}</ItemField>
 
         <ItemField title="Due to:">
-          {formatFullDate(task.due_to_date, task.due_to_time)}
+          {task.due_to_time
+            ? formatFullDate(task.due_to_date, task.due_to_time)
+            : formatDate(task.due_to_date)}
         </ItemField>
 
         <ItemField title="Description:">{task.text}</ItemField>
