@@ -1,7 +1,7 @@
 import { ENV } from "@/constants";
 import axios, { HttpStatusCode } from "axios";
 
-const baseURL = `http://${ENV.apiHost}:${ENV.apiPort}/api`;
+const baseURL = `${ENV.apiScheme}://${ENV.apiHost}:${ENV.apiPort}/api`;
 
 export const Api = axios.create({
   headers: {
